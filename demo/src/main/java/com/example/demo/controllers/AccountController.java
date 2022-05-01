@@ -31,7 +31,7 @@ public class AccountController {
 		return "Hello";
 	}
 	
-	@PostMapping("/accounts")
+	@PostMapping("/accounts") 
 	public Long createAccount(@RequestBody AccountRequestDTO accountRequestDTO) {
 		return accountService.createAccount(accountRequestDTO.getName(), accountRequestDTO.getEmail(), accountRequestDTO.getBill());
 	}
