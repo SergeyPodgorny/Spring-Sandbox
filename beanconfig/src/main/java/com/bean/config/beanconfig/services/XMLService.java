@@ -2,8 +2,19 @@ package com.bean.config.beanconfig.services;
 
 public class XMLService {
 	
+	
+	private AnotherService anotherService;
+	
+	
+	
+	
 	public String printMessage() {
-		return "Hello XML!";
+		return anotherService.append("Hello XML!");
+	}
+
+
+	public void setAnotherService(AnotherService anotherService) {
+		this.anotherService = anotherService;
 	}
 	
 	
