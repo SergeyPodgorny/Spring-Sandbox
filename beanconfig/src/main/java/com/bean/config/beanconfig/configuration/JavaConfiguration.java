@@ -11,7 +11,12 @@ public class JavaConfiguration {
 	
 	@Bean
 	public JavaConfigService javaConfigService() {
-		return new JavaConfigService();
+		
+		
+		JavaConfigService javaConfigService = new JavaConfigService("Hello from preadjusted Java Configured Bean!", 5);
+		
+		
+		return javaConfigService;
 	}
 	
 	
