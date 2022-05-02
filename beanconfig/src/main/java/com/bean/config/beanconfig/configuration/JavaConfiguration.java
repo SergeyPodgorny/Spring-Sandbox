@@ -9,7 +9,7 @@ import com.bean.config.beanconfig.javaconfig.services.JavaConfigService;
 public class JavaConfiguration {
 
 	
-	@Bean
+	@Bean(name = "full auto config")
 	public JavaConfigService javaConfigService() {
 		
 		
@@ -19,5 +19,16 @@ public class JavaConfiguration {
 		return javaConfigService;
 	}
 	
+	
+	@Bean(name = "lame config")
+	public JavaConfigService javaConfigService1() {
+	
+	
+	JavaConfigService javaConfigService = new JavaConfigService();
+	
+	
+	return javaConfigService;
+	
+	}
 	
 }
