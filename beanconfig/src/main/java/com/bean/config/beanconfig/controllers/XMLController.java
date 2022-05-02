@@ -16,6 +16,7 @@ public class XMLController {
 	
 	private final XMLService xmlService;
 	
+	
 	@Autowired
 	public XMLController(XMLService xmlService) {
 		this.xmlService = xmlService;
@@ -25,6 +26,11 @@ public class XMLController {
 	@GetMapping("/helloXML")
 	public String helloXML() {
 		return xmlService.printMessage();
+	}
+	
+	@GetMapping("/helloXML2")
+	public int helloXML2() {
+		return xmlService.printAnotherMessage();
 	}
 	
 	
