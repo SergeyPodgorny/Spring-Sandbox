@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean class="com.bean.config.beanconfig.services.XMLService" id="XMLService">
+	<bean class="com.bean.config.beanconfig.xml.services.XMLService" id="XMLService">
 
 	<property name="AnotherService" ref = "AnotherService"/>
 	
@@ -13,9 +13,9 @@
 	</bean>
 	
 	
-	<bean class = "com.bean.config.beanconfig.services.AnotherService" id = "AnotherService"/>
+	<bean class = "com.bean.config.beanconfig.xml.services.AnotherService" id = "AnotherService"/>
 	
-	<bean class = "com.bean.config.beanconfig.services.OneMoreService" id = "OneMoreService"/>
+	<bean class = "com.bean.config.beanconfig.xml.services.OneMoreService" id = "OneMoreService"/>
 	
 	
 </beans>

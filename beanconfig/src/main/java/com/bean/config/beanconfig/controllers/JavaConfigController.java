@@ -17,7 +17,7 @@ public class JavaConfigController {
 		this.javaConfigService = javaConfigService;
 	}
 	
-	@GetMapping("helloJava")
+	@GetMapping("/helloJava")
 	public String messagePrinter() {
 		return javaConfigService.helloMessage();
 	}
