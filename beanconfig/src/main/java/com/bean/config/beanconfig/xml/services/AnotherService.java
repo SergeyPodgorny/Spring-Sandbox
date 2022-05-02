@@ -1,4 +1,4 @@
-package com.bean.config.beanconfig.services;
+package com.bean.config.beanconfig.xml.services;
 
 
 
