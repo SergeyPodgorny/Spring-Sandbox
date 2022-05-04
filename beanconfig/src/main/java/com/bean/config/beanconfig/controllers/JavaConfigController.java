@@ -13,8 +13,8 @@ public class JavaConfigController {
 	
 	JavaConfigService javaConfig;
 	
-	@Autowired
-	public JavaConfigController(@Qualifier("lame config") JavaConfigService javaConfig) {
+	@Autowired					//@Qualifier("lame config")
+	public JavaConfigController( JavaConfigService javaConfig) {
 		this.javaConfig = javaConfig;
 	}
 	

@@ -2,6 +2,7 @@ package com.bean.config.beanconfig.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import com.bean.config.beanconfig.javaconfig.services.JavaConfigService;
 
@@ -21,6 +22,7 @@ public class JavaConfiguration {
 	
 	
 	@Bean(name = "lame config")
+	@Primary
 	public JavaConfigService javaConfigService1() {
 	
 	
