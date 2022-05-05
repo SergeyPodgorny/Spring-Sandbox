@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.data.handling.data.handling.entity.Account;
+import com.data.handling.data.handling.repository.AccountRepository;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -20,13 +21,32 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	
+	@Autowired
+	private AccountRepository accountRepository;
+	
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
-		jdbcTemplate.execute("INSERT INTO ACCOUNT (id, name, email, age) VALUES (1, 'Stinson', 'asdasdgmailcom', 15)");
+		int i = 0;
+		
+		while(i<10) {
+			
+			accountRepository.save(new Account("Stinson", "Stinson@SuperStar.com", 2));
+			
+			i++;
+		
+		}
 		
 		
-		System.out.println(getAccountById(1L));
+		System.out.println(accountRepository.getAcc(2L));
+		
+		
+//		jdbcTemplate.execute("INSERT INTO ACCOUNT (id, name, email, age) VALUES (1, 'Stinson', 'asdasdgmailcom', 15)");
+		
+		
+//		System.out.println(getAccountById(1L));
 		
 		
 //		Map<String, Object> queryResult = jdbcTemplate.queryForMap("SELECT * FROM ACCOUNT");
