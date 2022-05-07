@@ -8,8 +8,9 @@ import com.beanscope.beanscope.service.ServicePrototype;
 import com.beanscope.beanscope.service.ServiceSingleton;
 
 @Service
-public class Service1 implements CommandLineRunner {
+public class Service2 implements CommandLineRunner {
 
+	
 	
 	@Autowired
 	private ServicePrototype servicePrototype;
@@ -18,28 +19,32 @@ public class Service1 implements CommandLineRunner {
 	private ServiceSingleton serviceSingleton;
 	
 	
+	
+	
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
-		
-		System.out.println("Service1");
+		System.out.println("Service2");
 		
 		System.out.println();
 		
 		System.out.println("Prototype");
 		
-		servicePrototype.setState("state2");
-		
 		System.out.println(servicePrototype.getState());
+		
 		
 		
 		System.out.println("Singleton");
 		
-		serviceSingleton.setState("state2");
-		
 		System.out.println(serviceSingleton.getState());
 		
-		System.out.println();
+		
+		
 	}
+	
 
+	
+	
+	
 }
