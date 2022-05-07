@@ -2,6 +2,8 @@ package com.data.handling.data.handling;
 
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -39,8 +41,13 @@ public class Application implements CommandLineRunner {
 		
 		}
 		
+		System.out.println(accountRepository.getAccountById(2L).getName());
 		
-		System.out.println(accountRepository.getAcc(2L));
+		accountRepository.updateName("Sonya", 2L);
+		
+		System.out.println(accountRepository.getAccountById(2L).getName());
+		
+		
 		
 		
 //		jdbcTemplate.execute("INSERT INTO ACCOUNT (id, name, email, age) VALUES (1, 'Stinson', 'asdasdgmailcom', 15)");
