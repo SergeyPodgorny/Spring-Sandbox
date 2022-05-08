@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.beanscope.beanscope.service.ServicePrototype;
 import com.beanscope.beanscope.service.ServiceSingleton;
 
-@Service("service2")
+@Service
 public class Service2 implements CommandLineRunner {
 
 	

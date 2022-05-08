@@ -9,6 +9,8 @@ import org.springframework.context.ApplicationContext;
 
 import com.beanscope.beanscope.runner.Service1;
 import com.beanscope.beanscope.runner.Service2;
+import com.beanscope.beanscope.service.ServicePrototype;
+import com.beanscope.beanscope.service.ServiceSingleton;
 
 
 
@@ -35,9 +37,19 @@ public class BeanscopeApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		Service2 service2 = (Service2) applicationContext.getBean("service2");
-		service2.run();
+		ServicePrototype servicePrototype = (ServicePrototype) applicationContext.getBean("servicePrototype");
+		
+		applicationContext.getAutowireCapableBeanFactory().destroyBean(servicePrototype);
+		
+		ServiceSingleton serviceSingleton = (ServiceSingleton) applicationContext.getBean("serviceSingleton");
+		
+		applicationContext.getAutowireCapableBeanFactory().destroyBean(serviceSingleton);
+		
+		
 	}
+	
+	
+	
 	
 	
 
