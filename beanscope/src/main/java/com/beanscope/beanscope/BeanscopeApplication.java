@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 import com.beanscope.beanscope.runner.Service1;
 import com.beanscope.beanscope.runner.Service2;
@@ -14,6 +15,12 @@ import com.beanscope.beanscope.runner.Service2;
 @SpringBootApplication
 public class BeanscopeApplication implements CommandLineRunner{
 
+	
+	
+	@Autowired
+	ApplicationContext applicationContext;
+	
+	
 	@Autowired
 	Service1 service1;
 	
@@ -27,8 +34,9 @@ public class BeanscopeApplication implements CommandLineRunner{
 	}
 
 	@Override
-	public void run(String... args) {
-		stop();
+	public void run(String... args) throws Exception {
+		Service2 service2 = (Service2) applicationContext.getBean("service2");
+		service2.run();
 	}
 	
 	
