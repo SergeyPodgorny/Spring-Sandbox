@@ -12,7 +12,7 @@ import com.beanscope.beanscope.runner.Service2;
 
 
 @SpringBootApplication
-public class BeanscopeApplication{
+public class BeanscopeApplication implements CommandLineRunner{
 
 	@Autowired
 	Service1 service1;
@@ -26,9 +26,16 @@ public class BeanscopeApplication{
 		
 	}
 
-
-
+	@Override
+	public void run(String... args) {
+		stop();
+	}
 	
+	
+
+	private void stop() {
+		throw new RuntimeException("Stop the service!");
+	}
 	
 
 
