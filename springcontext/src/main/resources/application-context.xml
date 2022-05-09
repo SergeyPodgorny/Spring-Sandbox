@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class = "com.springcontext.springcontext.Cat" id = "firstCat">
+	
+	<property name = "name" value = "stinson"> </property>
+	
+	<property name = "handsomnes" value = "1"> </property>
+		
+	</bean> 
+	
+	<bean class = "com.springcontext.springcontext.Cat" id = "secondCat" scope = "prototype">
+	
+	<property name = "name" value = "sonya"> </property>
+	
+	<property name = "handsomnes" value = "1"> </property>
+		
+	</bean> 
+	
+	
+	
+	<bean class = "com.springcontext.springcontext.HandsomnesContestImpl" id = "HandsomnesContestImpl">
+	
+	<property name = "firstCat" ref = "firstCat"> </property>
+	
+	<property name = "secondCat" ref = "secondCat"> </property>
+		
+	</bean> 
+	
+	
+	
+	
+</beans>
