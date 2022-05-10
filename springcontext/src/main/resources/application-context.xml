@@ -30,6 +30,8 @@
 	</bean> 
 	
 	
+	<bean class = "com.springcontext.springcontext.CalculateHandsomnesBeanPostProcessorImpl"/>
+	
 	
 	
 </beans>

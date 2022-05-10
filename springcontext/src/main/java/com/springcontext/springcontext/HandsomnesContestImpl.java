@@ -18,9 +18,9 @@ public class HandsomnesContestImpl implements HandsomnesContest{
 		
 		
 		if(firstCat.getHandsomnes() > secondCat.getHandsomnes()) {
-			System.out.println("The winner is:" + firstCat.getName());
+			System.out.println("The winner is :" + firstCat.getName()+ " with cutines: " + firstCat.getHandsomnes());
 		} else if (firstCat.getHandsomnes() < secondCat.getHandsomnes()){
-			System.out.println("The winner is:" + secondCat.getName());
+			System.out.println("The winner is :" + secondCat.getName()+ " with cutines: " + secondCat.getHandsomnes());
 		} else {
 			System.out.println("Both cats are cute!");
 		}
