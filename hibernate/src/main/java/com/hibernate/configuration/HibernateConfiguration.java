@@ -1,0 +1,58 @@
+package com.hibernate.configuration;
+
+import java.util.Properties;
+
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@Configuration
+@EnableTransactionManagement
+@ImportResource("classpath:db.properties")
+public class HibernateConfiguration {
+
+	
+	@Autowired
+	Environment environment;
+	
+	
+	
+	public HibernateConfiguration hibernateConfiguration() {
+		return new HibernateConfiguration();
+	}
+	
+	@Bean
+	public BasicDataSource basicDataSource() {
+		BasicDataSource basicDataSource = new BasicDataSource();
+		basicDataSource.setDriverClassName(environment.getProperty("jdbc.driverClassName"));
+		basicDataSource.setUrl(environment.getProperty("jdbc.url"));
+		basicDataSource.setUsername("jdbc.user");
+		basicDataSource.setPassword("jdbc.pass");
+		return basicDataSource;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	private Properties hibernateProperties() {
+		
+		Properties properties = new Properties();
+		
+		properties.setProperty("hibernate.temp.use_jdbc_metadata_defaults", environment.getProperty("hibernate.temp.use_jdbc_metadata_defaults"));
+		properties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+		properties.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
+		properties.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+		
+		return properties;
+	}
+	
+	
+}
