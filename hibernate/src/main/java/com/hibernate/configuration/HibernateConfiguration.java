@@ -3,11 +3,14 @@ package com.hibernate.configuration;
 import java.util.Properties;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
@@ -24,6 +27,26 @@ public class HibernateConfiguration {
 	public HibernateConfiguration hibernateConfiguration() {
 		return new HibernateConfiguration();
 	}
+	
+	
+	@Bean
+	public LocalSessionFactoryBean sessionFactory() {
+		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+		sessionFactory.setHibernateProperties(hibernateProperties());
+		sessionFactory.setDataSource(basicDataSource());
+		sessionFactory.setPackagesToScan("com.hibernate.entity");
+		return sessionFactory;
+	}
+	
+	@Bean
+	@Autowired
+	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+		transactionManager.setSessionFactory(sessionFactory);
+		return transactionManager;
+	}
+	
+	
 	
 	@Bean
 	public BasicDataSource basicDataSource() {
