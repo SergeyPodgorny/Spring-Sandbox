@@ -24,11 +24,7 @@ public class HibernateConfiguration {
 	
 	
 	
-	public HibernateConfiguration hibernateConfiguration() {
-		return new HibernateConfiguration();
-	}
-	
-	
+		
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
