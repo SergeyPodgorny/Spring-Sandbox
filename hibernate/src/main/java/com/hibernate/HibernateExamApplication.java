@@ -27,6 +27,7 @@ public class HibernateExamApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		accountDAO.save(new Account("Stinson",2));
+		System.out.println(accountDAO.findById(1L).toString());
 		
 	}
 	

@@ -56,11 +56,6 @@ public class HibernateConfiguration {
 	
 	
 	
-	
-	
-	
-	
-	
 	private Properties hibernateProperties() {
 		
 		Properties properties = new Properties();
