@@ -1,9 +1,12 @@
 package com.hibernate.configuration.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Account {
@@ -18,6 +21,11 @@ public class Account {
 	
 	private Integer age;
 
+	@OneToMany
+	private List<Bill> bill;
+	
+	
+	
 	public Account() {
 		
 	}
