@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ImportResource("classpath:db.properties")
+@PropertySource("classpath:db.properties")
 public class HibernateConfiguration {
 
 	
@@ -30,7 +30,7 @@ public class HibernateConfiguration {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		sessionFactory.setDataSource(basicDataSource());
-		sessionFactory.setPackagesToScan("com.hibernate.entity");
+		sessionFactory.setPackagesToScan("com.hibernate.configuration.entity");
 		return sessionFactory;
 	}
 	
@@ -49,8 +49,8 @@ public class HibernateConfiguration {
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName(environment.getProperty("jdbc.driverClassName"));
 		basicDataSource.setUrl(environment.getProperty("jdbc.url"));
-		basicDataSource.setUsername("jdbc.user");
-		basicDataSource.setPassword("jdbc.pass");
+		basicDataSource.setUsername(environment.getProperty("jdbc.user"));
+		basicDataSource.setPassword(environment.getProperty("jdbc.pass"));
 		return basicDataSource;
 	}
 	

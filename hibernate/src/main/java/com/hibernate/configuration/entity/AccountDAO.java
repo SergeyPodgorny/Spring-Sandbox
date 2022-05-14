@@ -28,6 +28,7 @@ public class AccountDAO {
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
+		System.out.println("account: "+ account.toString() + " saved");
 	}
 	
 	public Account findById(Long id) {
