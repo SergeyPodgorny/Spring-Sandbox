@@ -1,5 +1,8 @@
 package com.hibernate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +12,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 import com.hibernate.configuration.entity.Account;
 import com.hibernate.configuration.entity.AccountDAO;
+import com.hibernate.configuration.entity.Bill;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class})
 public class HibernateExamApplication implements CommandLineRunner {
@@ -26,8 +30,26 @@ public class HibernateExamApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) {
-		accountDAO.save(new Account("Stinson",2));
+		
+		
+		Account account = new Account("Stinson",2);
+		
+		List<Bill> bills = new ArrayList<>();
+		
+		
+		for (int i = 0; i<10; i++) {
+			bills.add(new Bill((long) (1+i)));
+		}
+		
+		account.setBill(bills);
+		
+		
+		Account accountDB = accountDAO.save(account);
 		System.out.println(accountDAO.findById(1L).toString());
+		
+		System.out.println(accountDB.getBill());
+		
+		accountDB.getBill().stream().forEach(System.out::println);
 		
 	}
 	

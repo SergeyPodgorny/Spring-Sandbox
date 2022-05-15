@@ -21,7 +21,7 @@ public class AccountDAO {
 	}
 	
 	
-	public void save(Account account) {
+	public Account save(Account account) {
 		Session session = sessionFactory.openSession();		
 		session.beginTransaction();
 		session.save(account);
@@ -29,6 +29,7 @@ public class AccountDAO {
 		session.getTransaction().commit();
 		session.close();
 		System.out.println("account: "+ account.toString() + " saved");
+		return account;
 	}
 	
 	public Account findById(Long id) {

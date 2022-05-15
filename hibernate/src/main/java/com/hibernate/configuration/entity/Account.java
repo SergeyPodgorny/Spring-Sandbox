@@ -2,7 +2,9 @@ package com.hibernate.configuration.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +23,7 @@ public class Account {
 	
 	private Integer age;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "amount")
 	private List<Bill> bill;
 	
 	
@@ -30,10 +32,15 @@ public class Account {
 		
 	}
 
+	
+
 	public Account(String name, Integer age) {
 		this.name = name;
 		this.age = age;
+		
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -57,6 +64,14 @@ public class Account {
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+	public List<Bill> getBill() {
+		return bill;
+	}
+
+	public void setBill(List<Bill> bill) {
+		this.bill = bill;
 	}
 
 	@Override

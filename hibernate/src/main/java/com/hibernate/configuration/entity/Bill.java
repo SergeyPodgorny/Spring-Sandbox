@@ -14,7 +14,7 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToMany
+	
 	private Long amount;
 
 	public Bill() {
@@ -39,6 +39,11 @@ public class Bill {
 
 	public void setAmount(Long amount) {
 		this.amount = amount;
+	}
+
+	@Override
+	public String toString() {
+		return "Bill [id=" + id + ", amount=" + amount + "]";
 	}
 
 	
