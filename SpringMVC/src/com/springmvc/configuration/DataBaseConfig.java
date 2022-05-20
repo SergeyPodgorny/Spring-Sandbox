@@ -15,6 +15,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
 @Configuration
 @EnableJpaRepositories("com.springmvc.repository")
 @EnableTransactionManagement
@@ -49,8 +50,8 @@ public class DataBaseConfig {
 	
 	public PlatformTransactionManager transActionManager() {
 		
-		PlatformTransactionManager manager = new JpaTransactionManager();
-		
+		JpaTransactionManager manager = new JpaTransactionManager();
+		manager.setEntityManagerFactory(entityManger().getObject());
 		return manager;
 	}
 	
