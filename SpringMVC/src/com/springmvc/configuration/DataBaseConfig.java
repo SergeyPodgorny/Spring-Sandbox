@@ -19,14 +19,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableJpaRepositories("com.springmvc.repository")
 @EnableTransactionManagement
-@PropertySource("classpath:")
+@PropertySource("classpath:db")
 public class DataBaseConfig {
 	
 	@Autowired
 	private Environment environment;
 	
 	@Bean
-	public BasicDataSource dataSource() {
+	public BasicDataSource basicDataSource() {
 		
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName(environment.getProperty("jdbc.driverClassName"));
@@ -37,27 +37,28 @@ public class DataBaseConfig {
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManger() {
+	public LocalContainerEntityManagerFactoryBean entityMangerFactoryBean() {
 		
-		LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
-		entityManager.setDataSource(dataSource());
-		entityManager.setPackagesToScan("com.springmvc.entity");
-		entityManager.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-		entityManager.setJpaProperties(hibernatProperties());
-		return entityManager;
+		LocalContainerEntityManagerFactoryBean entityMangerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+		entityMangerFactoryBean.setDataSource(basicDataSource());
+		entityMangerFactoryBean.setPackagesToScan("com.springmvc.entity");
+		entityMangerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+		entityMangerFactoryBean.setJpaProperties(hibernateProperties());
+		entityMangerFactoryBean.afterPropertiesSet();
+		return entityMangerFactoryBean;
 	}
 	
 	
 	public PlatformTransactionManager transActionManager() {
 		
 		JpaTransactionManager manager = new JpaTransactionManager();
-		manager.setEntityManagerFactory(entityManger().getObject());
+		manager.setEntityManagerFactory(entityMangerFactoryBean().getObject());
 		return manager;
 	}
 	
 	
 	
-	private Properties hibernatProperties() {
+	private Properties hibernateProperties() {
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
 		hibernateProperties.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
