@@ -1,5 +1,6 @@
 package com.springcontext.springcontext;
 
+@ShowTransaction
 public class HandsomnesContestImpl implements HandsomnesContest{
 
 	

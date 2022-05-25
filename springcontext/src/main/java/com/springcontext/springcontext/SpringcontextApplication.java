@@ -10,7 +10,7 @@ public class SpringcontextApplication {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml"); 
 		
 		
-		HandsomnesContest contest = context.getBean(HandsomnesContestImpl.class);
+		HandsomnesContest contest = context.getBean(HandsomnesContest.class);
 		
 		contest.evaluateHandsomnes();
 		

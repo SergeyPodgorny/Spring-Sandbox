@@ -32,6 +32,6 @@
 	
 	<bean class = "com.springcontext.springcontext.CalculateHandsomnesBeanPostProcessorImpl"/>
 	
-	
+	<bean class = "com.springcontext.springcontext.ShowTransactionBeanPostProcessorImpl"/>
 	
 </beans>

@@ -3,6 +3,8 @@ package com.springcontext.springcontext;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,13 +37,30 @@ public class ShowTransactionBeanPostProcessorImpl implements BeanPostProcessor {
 		
 		Class<?> currentBean = beanStorage.get(beanName);
 		
-		InvocationHandler i1 = (Object arg0, Method arg1, Object[] arg2) -> {
-			return null;
-			
-		};
+//		InvocationHandler i1 = (Object proxy, Method method, Object[] args) -> {
+//			System.out.println("Open transaction");
+//			Instant startTime = Instant.now();
+//			Object result = method.invoke(bean, args);
+//			Instant endTime = Instant.now();
+//			System.out.println(Duration.between(startTime, endTime));
+//			System.out.println("Close transaction");
+//			return result;
+//		};
 		
 		if(currentBean != null) {
-			return Proxy.newProxyInstance(currentBean.getClassLoader(), currentBean.getInterfaces(), i1); 
+			return Proxy.newProxyInstance(currentBean.getClassLoader(), currentBean.getInterfaces(), new InvocationHandler(){
+				@Override
+				public Object invoke(Object proxy, Method method, Object[] args) throws Throwable{
+					System.out.println("Open transaction");
+					Instant startTime = Instant.now();
+					Object result = method.invoke(bean, args);
+					Instant endTime = Instant.now();
+					System.out.println(Duration.between(startTime, endTime));
+					System.out.println("Close transaction");
+					return result;
+				}
+				
+			}); 
 				
 		
 		}
