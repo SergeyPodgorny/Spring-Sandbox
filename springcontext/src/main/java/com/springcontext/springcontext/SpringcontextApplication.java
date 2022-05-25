@@ -15,9 +15,6 @@ public class SpringcontextApplication {
 		contest.evaluateHandsomnes();
 		
 		
-		
-		
-		
 	}
 
 }
