@@ -1,6 +1,4 @@
 rootProject.name = 'SpringCloudDemo'
-include 'Account-Service'
-include 'Acount-Service'
 include 'account-service'
 include 'bill-service'
 include 'deposit-service'
