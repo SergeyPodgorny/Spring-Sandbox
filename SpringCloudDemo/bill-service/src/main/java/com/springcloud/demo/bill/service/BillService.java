@@ -7,6 +7,8 @@ import com.springcloud.demo.bill.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
+
 @Service
 public class BillService {
 
@@ -22,16 +24,28 @@ public class BillService {
         billRepository.save(bill);
     }
 
-    public Bill getBillById(Long id){
+    public Bill getBillById(Long billId){
 
-        return billRepository.findById(id).orElseThrow(() -> new BillNotFoundException("Required bill with id: " + id+ "not found"));
+        return billRepository.findById(billId).orElseThrow(() -> new BillNotFoundException("Required bill with id: " + billId + "not found"));
 
     }
 
-    
+    public void updateBill(Long billId, BillDTO billDTO){
+        Bill billToBeUpdated = new Bill();
+        billToBeUpdated.setBillId(billId);
+        billToBeUpdated.setAmount(billDTO.getAmount());
+        billToBeUpdated.setAccountId(billDTO.getAccountId());
+        billToBeUpdated.setIsDefault(billDTO.getIsDefault());
+        billToBeUpdated.setIsOverDraftEnabled(billDTO.getOverDraftEnabled());
+        billRepository.save(billToBeUpdated);
 
 
+    }
 
+    public void deleteBillById(Long billId) {
+        Bill billToBeDeleted = getBillById(billId);
+        billRepository.delete(billToBeDeleted);
+    }
 
 
 

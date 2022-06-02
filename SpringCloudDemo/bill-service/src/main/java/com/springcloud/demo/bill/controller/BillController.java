@@ -42,11 +42,11 @@ public class BillController {
 
     @PutMapping("/{id}")
     public void updateBill(Long billId, @RequestBody BillDTO billDTO){
-
-
-
+        billService.updateBill(billId, billDTO);
     }
 
-
+    public void deleteBillById(Long billId){
+        billService.deleteBillById(billId);
+    }
 
 }

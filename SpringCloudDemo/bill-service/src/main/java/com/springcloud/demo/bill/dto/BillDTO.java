@@ -12,7 +12,6 @@ import java.time.OffsetDateTime;
 
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Setter
 @Getter
 public class BillDTO {
@@ -30,7 +29,7 @@ public class BillDTO {
     public BillDTO(Bill bill) {
         this.amount = bill.getAmount();
         this.isDefault = bill.getIsOverDraftEnabled();
-        this.billCreationDateTime = bill.getBillCreationDateTime();
+        this.accountId = bill.getAccountId();
         this.overDraftEnabled = bill.getIsOverDraftEnabled();
     }
 }
