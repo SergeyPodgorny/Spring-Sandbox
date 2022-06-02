@@ -28,7 +28,7 @@ public class BillDTO {
     private Boolean overDraftEnabled;
 
     public BillDTO(Bill bill) {
-        this.amount = bill.getAmount() ;
+        this.amount = bill.getAmount();
         this.isDefault = bill.getIsOverDraftEnabled();
         this.billCreationDateTime = bill.getBillCreationDateTime();
         this.overDraftEnabled = bill.getIsOverDraftEnabled();

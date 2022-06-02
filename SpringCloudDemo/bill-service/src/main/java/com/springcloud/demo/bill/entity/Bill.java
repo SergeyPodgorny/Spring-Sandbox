@@ -36,11 +36,12 @@ public class Bill {
 
     private Boolean isOverDraftEnabled;
 
-    public Bill(Long accountId, BigDecimal amount, Boolean isDefault, OffsetDateTime billCreationDateTime, Boolean isOverDraftEnabled) {
+    public Bill(Long accountId, BigDecimal amount, Boolean isDefault, Boolean isOverDraftEnabled, OffsetDateTime billCreationDateTime) {
         this.accountId = accountId;
         this.amount = amount;
         this.isDefault = isDefault;
-        this.billCreationDateTime = billCreationDateTime;
         this.isOverDraftEnabled = isOverDraftEnabled;
+        this.billCreationDateTime = billCreationDateTime;
+
     }
 }
