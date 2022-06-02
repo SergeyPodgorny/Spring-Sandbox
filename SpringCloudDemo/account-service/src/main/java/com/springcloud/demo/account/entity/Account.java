@@ -27,16 +27,17 @@ public class Account {
 
     private String phone;
 
-    private OffsetDateTime creationalDateTime;
+    private OffsetDateTime accountCreationDateTime;
 
     @ElementCollection
     private List<Long> bills;
 
 
-    public Account(String name, String email, String phone, List<Long> bills) {
+    public Account(String name, String email, String phone, List<Long> bills, OffsetDateTime accountCreationDateTime) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.bills = bills;
+        this.accountCreationDateTime = accountCreationDateTime;
     }
 }

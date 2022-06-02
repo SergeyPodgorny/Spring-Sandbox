@@ -7,6 +7,8 @@ import com.springcloud.demo.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.OffsetDateTime;
+
 @RestController
 public class AccountController {
 
@@ -31,7 +33,7 @@ public class AccountController {
     @PostMapping("/create")
     public void createAccount(@RequestBody AccountDTO accountDTO){
         Account creatingAccount = new Account(accountDTO.getName(), accountDTO.getEmail(),
-                accountDTO.getPhone(),accountDTO.getBills());
+                accountDTO.getPhone(),accountDTO.getBills(), OffsetDateTime.now());
         accountService.createAccount(creatingAccount);
     }
     @DeleteMapping("/{id}")
