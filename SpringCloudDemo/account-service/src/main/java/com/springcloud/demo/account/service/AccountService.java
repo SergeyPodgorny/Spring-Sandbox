@@ -40,7 +40,7 @@ public class AccountService {
 
     public void updateAccount(Long accountId, AccountDTO accountDTO){
            Account accountForUpdate = new Account();
-           accountForUpdate.setId(accountId);
+           accountForUpdate.setAccountId(accountId);
            accountForUpdate.setName(accountDTO.getName());
            accountForUpdate.setBills(accountDTO.getBills());
            accountForUpdate.setEmail(accountDTO.getEmail());

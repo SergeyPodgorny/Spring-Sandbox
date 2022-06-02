@@ -28,7 +28,7 @@ public class AccountDTO {
         this.name = account.getName();
         this.email = account.getEmail();
         this.phone = account.getPhone();
-        this.creationDateTime = account.getCreationalDateTime();
+        this.creationDateTime = account.getAccountCreationDateTime();
         this.bills = account.getBills();
     }
 
