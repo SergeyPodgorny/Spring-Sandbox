@@ -6,4 +6,7 @@ include 'config-service'
 include 'gateway'
 include 'notification-service'
 include 'discovery-service'
+include 'gateway-service'
+include 'gateway'
+include 'gateway-service'
 
