@@ -23,3 +23,5 @@ A repository for storing my Spring Framework scratch and tutorials, such as:
 > SpringMVC folder - configuring a Spring application without SpringBoot.
 > 
 > SpringCloudDemo folder - demo project based on microservice architecture.
+> 
+> Caching folder - deploying the caffeine cache in Spring.
