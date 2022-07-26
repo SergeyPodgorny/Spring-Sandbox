@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 import com.caching.service.GameService;
 
 @SpringBootApplication
+@EnableCaching
 public class CachingApplication implements CommandLineRunner{
 
 	public static void main(String[] args) {
@@ -34,7 +36,7 @@ public class CachingApplication implements CommandLineRunner{
 			System.out.println(gameService.findGameById(""));
 			n++;
 			Instant endTime = Instant.now();
-			System.out.println(Duration.between(startTme, endTime).toMillis());
+			System.out.println("time spent to get the game from db: " + Duration.between(startTme, endTime).toMillis()+ " milliseconds");
 		}
 
 		
