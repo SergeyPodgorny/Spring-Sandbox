@@ -14,7 +14,7 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 public class CaffeineCacheConfiguration {
 
 	
-	@Bean
+//	@Bean
 	public CacheManager cacheManager() {
 		CaffeineCacheManager cacheManager = new CaffeineCacheManager("games");
 		cacheManager.setCaffeine(caffeineCache());

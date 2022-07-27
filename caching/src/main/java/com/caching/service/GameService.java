@@ -32,7 +32,7 @@ public class GameService {
 		
 		logger.info("service started");
 		Game foundEntry = gameRepositoryImpl.findGameById(id); 
-		logger.info("service terminated");
+		
 		return foundEntry;
 		
 		
