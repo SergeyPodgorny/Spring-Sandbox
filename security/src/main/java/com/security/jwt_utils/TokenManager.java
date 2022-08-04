@@ -10,6 +10,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys; 
 @Component
@@ -32,6 +34,14 @@ public class TokenManager {
 				.setExpiration(new Date(System.currentTimeMillis()+token_exp_time)).signWith(convertStringToKey(jwtSecret)).compact();
 	}
 	
+	public Boolean validateToken (String token, UserDetails userDetails) {
+		String username = getUsernameFromToken(token);
+		Claims claims = Jwts.parserBuilder().setSigningKey(convertStringToKey(jwtSecret)).build().parseClaimsJws(token).getBody();
+		Boolean isTokenExpired = claims.getExpiration().before(new Date());
+		return (username.equals(userDetails.getUsername()) && !isTokenExpired);
+		
+	}
+	
 	
 	private Key convertStringToKey(String secret) {
 		byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
@@ -39,8 +49,13 @@ public class TokenManager {
 	}
 	
 	
+	public String getUsernameFromToken(String token) {
+		 return Jwts.parserBuilder().setSigningKey(convertStringToKey(jwtSecret)).build().parseClaimsJws(token).getBody().getSubject();
+
+	}
 	
 	
+
 	
 	
 
