@@ -1,4 +1,6 @@
 secret: somesecret
+expiration_time: 100
+
 
 spring:
   application:
@@ -9,6 +11,7 @@ spring:
     flyway:
       enabled: true
       validate-on-migrate: true
+      location: "classpath:db.migration"
     database: h2
     properties.hibernate.temp.use_jdbc_metadata_defaults: false
     hibernate:
