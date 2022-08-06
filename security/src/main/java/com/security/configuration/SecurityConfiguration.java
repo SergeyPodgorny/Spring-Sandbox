@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.security.jwt_utils.JwtAuthenticationEntryPoint;
 import com.security.jwt_utils.JwtFilter;
 
 @Configuration
@@ -27,9 +26,7 @@ public class SecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		
-		http
-		.authorizeRequests()
-			.antMatchers("/start_page", "login").permitAll();
+		http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated();
 	
 		return http.build();
 		}

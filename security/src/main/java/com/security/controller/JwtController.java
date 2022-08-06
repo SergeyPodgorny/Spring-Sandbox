@@ -1,5 +1,7 @@
 package com.security.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.security.SecurityApplication;
 import com.security.dto.JwtRequestDTO;
 import com.security.dto.JwtResponseDTO;
 import com.security.jwt_utils.TokenManager;
@@ -19,6 +22,9 @@ import com.security.service.JwtUserDetailsService;
 @RestController
 @CrossOrigin
 public class JwtController {
+	
+	
+	private Logger logger = LoggerFactory.getLogger(SecurityApplication.class);
 
 	@Autowired
 	private final AuthenticationManager authenticationManager;; 
@@ -37,16 +43,21 @@ public class JwtController {
 		this.tokenManager = tokenManager;
 	}
 
-	@GetMapping(value = "/login")
+	@GetMapping("/login")
 	public JwtResponseDTO createToken(@RequestBody JwtRequestDTO jwtRequestDTO) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequestDTO.getUsername(),jwtRequestDTO.getPassword()));
+			logger.info(jwtRequestDTO.getUsername());
 		} catch (DisabledException e) {
 			throw new Exception("ACCOUNT_DISABLED", e);
 		} catch (BadCredentialsException e) {
 			throw new Exception ("BAD_CREDENTIALS", e);
 		}
 		final UserDetails userDetails = jwtUserDetailService.loadUserByUsername(jwtRequestDTO.getUsername());
+		
+		
+		
+		
 		return new JwtResponseDTO (tokenManager.generateToken(userDetails));
 		
 	}
