@@ -14,7 +14,7 @@ public class TokenController {
 	
 	@GetMapping("/login")
 	public String getToken() {
-		return null;
+		return "token";
 	}
 	
 	
