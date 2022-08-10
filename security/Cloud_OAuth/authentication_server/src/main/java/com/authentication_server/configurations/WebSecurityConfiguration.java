@@ -17,15 +17,10 @@ public class WebSecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filter(HttpSecurity http) throws Exception {
 		
-//		http.authorizeRequests((authz)-> authz.anyRequest().authenticated()).httpBasic();
-	
-		
-		http.authorizeRequests().antMatchers("/","/h2").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll();
-		
-		
-				
+		http.authorizeRequests().antMatchers("/token").permitAll().anyRequest().authenticated();		
 		return http.build();
 	}
+	
 	
 	
 	@Bean

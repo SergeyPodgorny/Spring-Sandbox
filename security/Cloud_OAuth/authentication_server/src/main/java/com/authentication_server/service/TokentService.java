@@ -18,7 +18,7 @@ public class TokentService {
 	
 	
 	public String generateToken() {
-		return "";
+		return "token";
 	}
 	
 	

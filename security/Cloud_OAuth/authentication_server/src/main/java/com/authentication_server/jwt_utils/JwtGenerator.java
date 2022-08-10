@@ -22,7 +22,7 @@ public class JwtGenerator {
 	@Value("${variable.settings.security.expiration}")
 	private Long tokenExpirationDuration;	
 
-	public String generateToken(String subject, Map<String, String> claims) {
+	public String generate(String subject, Map<String, String> claims) {
 		Builder builder = JWT.create().withSubject(subject);
 		return builder.withIssuedAt(new Date())
 				.withExpiresAt(new Date(System.currentTimeMillis()+tokenExpirationDuration))

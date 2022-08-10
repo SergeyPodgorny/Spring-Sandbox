@@ -29,7 +29,7 @@ public class AuthApplication implements CommandLineRunner{
 	
 	
 	@Autowired
-	JwtGenerator token;
+	JwtGenerator jwtGenerator;
 	
 	
 	
@@ -41,7 +41,7 @@ public class AuthApplication implements CommandLineRunner{
 		
 		
 		System.out.println(tokenExpirationDuration);
-		System.out.println(token.generateToken("username", claims));
+		System.out.println(jwtGenerator.generate("username", claims));
 		
 	}
 	

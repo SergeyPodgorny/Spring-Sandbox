@@ -12,7 +12,7 @@ public class TokenController {
 	
 	
 	
-	@GetMapping("/login")
+	@GetMapping("/token")
 	public String getToken() {
 		return "token";
 	}
