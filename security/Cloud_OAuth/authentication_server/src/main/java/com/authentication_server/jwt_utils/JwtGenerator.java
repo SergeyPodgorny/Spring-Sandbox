@@ -22,12 +22,16 @@ public class JwtGenerator {
 	@Value("${variable.settings.security.expiration}")
 	private Long tokenExpirationDuration;	
 
-	public String generate(String subject, Map<String, String> claims) {
+	public String generate(String subject) {
 		Builder builder = JWT.create().withSubject(subject);
+		
+//		claims.entrySet().parallelStream().forEachOrdered((entry)->{
+//			String key = entry.getKey();
+//			String value = entry.getValue();
+//		});
+	
 		return builder.withIssuedAt(new Date())
-				.withExpiresAt(new Date(System.currentTimeMillis()+tokenExpirationDuration))
-				.withClaim("", "")
-				.sign(Algorithm.HMAC256(jwtSecret));
+				.withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration)).sign(Algorithm.HMAC256(jwtSecret));
 	}
 	
 	

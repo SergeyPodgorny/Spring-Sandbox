@@ -41,7 +41,7 @@ public class AuthApplication implements CommandLineRunner{
 		
 		
 		System.out.println(tokenExpirationDuration);
-		System.out.println(jwtGenerator.generate("username", claims));
+		System.out.println(jwtGenerator.generate("username"));
 		
 	}
 	
