@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -22,8 +24,8 @@ public class JwtGenerator {
 	@Value("${variable.settings.security.expiration}")
 	private Long tokenExpirationDuration;	
 
-	public String generate(String subject) {
-		Builder builder = JWT.create().withSubject(subject);
+	public String generate(UserDetails userdetails) {
+		Builder builder = JWT.create().withSubject("");
 		
 //		claims.entrySet().parallelStream().forEachOrdered((entry)->{
 //			String key = entry.getKey();

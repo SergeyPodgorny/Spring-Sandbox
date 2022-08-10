@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.authentication_server.jwt_utils.JwtGenerator;
+import com.authentication_server.dto.TokenRequestDTO;
 import com.authentication_server.service.TokenService;
 
 @RestController
@@ -22,8 +22,8 @@ public class TokenController {
 
 
 	@GetMapping("/token")
-	public String getToken(String subject) {
-		return tokenService.generateToken(subject);
+	public String getToken(TokenRequestDTO tokenRequest) {
+		return tokenService.generateToken(tokenRequest);
 	}
 	
 	
