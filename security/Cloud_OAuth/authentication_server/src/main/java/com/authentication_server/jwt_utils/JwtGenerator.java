@@ -24,8 +24,8 @@ public class JwtGenerator {
 	@Value("${variable.settings.security.expiration}")
 	private Long tokenExpirationDuration;	
 
-	public String generate(UserDetails userdetails) {
-		Builder builder = JWT.create().withSubject("");
+	public String generate(UserDetails userDetails) {
+		Builder builder = JWT.create().withSubject(userDetails.getUsername());
 		
 //		claims.entrySet().parallelStream().forEachOrdered((entry)->{
 //			String key = entry.getKey();
@@ -36,5 +36,18 @@ public class JwtGenerator {
 				.withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration)).sign(Algorithm.HMAC256(jwtSecret));
 	}
 	
+	
+	
+	public String generate1(UserDetails userDetails) {
+		Builder builder = JWT.create().withSubject(userDetails.getUsername());
+		
+//		claims.entrySet().parallelStream().forEachOrdered((entry)->{
+//			String key = entry.getKey();
+//			String value = entry.getValue();
+//		});
+	
+		return builder.withIssuedAt(new Date())
+				.withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration)).sign(Algorithm.HMAC256(jwtSecret));
+	}
 	
 }

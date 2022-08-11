@@ -2,6 +2,7 @@ package com.authentication_server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.authentication_server.dto.TokenRequestDTO;
@@ -22,8 +23,8 @@ public class TokenController {
 
 
 	@GetMapping("/token")
-	public String getToken(TokenRequestDTO tokenRequest) {
-		return tokenService.generateToken(tokenRequest);
+	public String getToken(@RequestBody TokenRequestDTO tokenRequest) {
+		return tokenService.generateToken(tokenRequest.getUsername());
 	}
 	
 	

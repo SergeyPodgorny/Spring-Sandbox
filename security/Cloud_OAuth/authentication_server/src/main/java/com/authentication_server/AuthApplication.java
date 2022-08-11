@@ -36,12 +36,7 @@ public class AuthApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		HashMap<String,String> claims = new HashMap<>();
-		System.out.println(jwtSecret);
-		
-		
-		System.out.println(tokenExpirationDuration);
-//		System.out.println(jwtGenerator.generate("username"));
+
 		
 	}
 	

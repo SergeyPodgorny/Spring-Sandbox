@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.authentication_server.dto.TokenRequestDTO;
-import com.authentication_server.dto.TokenResponseDTO;
 import com.authentication_server.jwt_utils.JwtGenerator;
 
 @Service
@@ -27,9 +25,9 @@ public class TokenService {
 	}
 	
 
-	public String generateToken(TokenRequestDTO tokenRequest) {
+	public String generateToken(String username) {
 		
-		UserDetails userDetails = userDetailsService.loadUserByUsername(tokenRequest.getUsername());
+		UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 		
 		return jwtGenerator.generate(userDetails);
 	}
