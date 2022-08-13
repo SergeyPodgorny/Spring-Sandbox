@@ -1,11 +1,9 @@
 package com.authentication_server.jwt_utils;
 
 import java.util.Date;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -36,18 +34,5 @@ public class JwtGenerator {
 				.withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration)).sign(Algorithm.HMAC256(jwtSecret));
 	}
 	
-	
-	
-	public String generate1(UserDetails userDetails) {
-		Builder builder = JWT.create().withSubject(userDetails.getUsername());
-		
-//		claims.entrySet().parallelStream().forEachOrdered((entry)->{
-//			String key = entry.getKey();
-//			String value = entry.getValue();
-//		});
-	
-		return builder.withIssuedAt(new Date())
-				.withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration)).sign(Algorithm.HMAC256(jwtSecret));
-	}
 	
 }

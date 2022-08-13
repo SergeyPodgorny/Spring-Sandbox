@@ -1,10 +1,8 @@
 package com.authentication_server.service;
 
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -14,22 +12,25 @@ import com.authentication_server.jwt_utils.JwtGenerator;
 @CrossOrigin
 public class TokenService {
 	
-	private final UserDetailsService userDetailsService;
+	
 	
 	private final JwtGenerator jwtGenerator;
 	
-	@Autowired
-	public TokenService(UserDetailsService userDetailsService, JwtGenerator jwtGenerator) {
-		this.userDetailsService = userDetailsService;
-		this.jwtGenerator = jwtGenerator;
-	}
+	private final CustomUserDetailsService userDetails;
 	
+	@Autowired
+	public TokenService(JwtGenerator jwtGenerator, CustomUserDetailsService userDetails) {
+		this.jwtGenerator = jwtGenerator;
+		this.userDetails = userDetails;
+	}
+
+
 
 	public String generateToken(String username) {
 		
-		UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 		
-		return jwtGenerator.generate(userDetails);
+		
+		return jwtGenerator.generate(userDetails.loadUserByUsername(username));
 	}
 
 	
