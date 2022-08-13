@@ -24,7 +24,10 @@ public class TokenController {
 
 	@GetMapping("/token")
 	public String getToken(@RequestBody TokenRequestDTO tokenRequest) {
-		return tokenService.generateToken(tokenRequest.getUsername());
+				
+		
+		
+		return tokenService.generateToken(tokenRequest.getUsername(), tokenRequest.getPassword());
 	}
 	
 	
