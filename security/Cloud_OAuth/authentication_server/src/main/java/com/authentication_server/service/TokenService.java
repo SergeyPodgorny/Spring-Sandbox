@@ -7,7 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-
+import com.authentication_server.jwt_utils.CustomUserDetailsService;
 import com.authentication_server.jwt_utils.JwtGenerator;
 
 @Service

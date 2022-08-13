@@ -1,6 +1,7 @@
 package com.authentication_server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,11 +25,11 @@ public class TokenController {
 
 
 	@GetMapping("/token")
-	public TokenResponseDTO getToken(@RequestBody TokenRequestDTO tokenRequest) {
+	public ResponseEntity<TokenResponseDTO> getToken(@RequestBody TokenRequestDTO tokenRequest) {
 				
 		String token = tokenService.generateToken(tokenRequest.getUsername(), tokenRequest.getPassword());
-		
-		return new TokenResponseDTO(token);
+				
+		return ResponseEntity.ok(new TokenResponseDTO(token));
 	}
 	
 	

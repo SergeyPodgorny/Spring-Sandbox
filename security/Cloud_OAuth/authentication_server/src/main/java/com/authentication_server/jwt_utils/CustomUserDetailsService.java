@@ -1,4 +1,4 @@
-package com.authentication_server.service;
+package com.authentication_server.jwt_utils;
 
 import java.util.ArrayList;
 
@@ -7,12 +7,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
 
 import com.authentication_server.entity.Account;
 import com.authentication_server.repository.AccountRepository;
 
-@Service
+@Component
 public class CustomUserDetailsService implements UserDetailsService{
 
 	
@@ -30,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Account userAccount = accountReposiory.findUserByUsername(username).get();
+		final Account userAccount = accountReposiory.findUserByUsername(username).get();
 		return new User(userAccount.getUsername(),userAccount.getPassword(), new ArrayList<>());
 	}
 
