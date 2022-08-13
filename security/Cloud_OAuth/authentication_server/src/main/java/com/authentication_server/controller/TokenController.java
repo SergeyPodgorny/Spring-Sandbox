@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.authentication_server.dto.TokenRequestDTO;
+import com.authentication_server.dto.TokenResponseDTO;
 import com.authentication_server.service.TokenService;
 
 @RestController
@@ -23,11 +24,11 @@ public class TokenController {
 
 
 	@GetMapping("/token")
-	public String getToken(@RequestBody TokenRequestDTO tokenRequest) {
+	public TokenResponseDTO getToken(@RequestBody TokenRequestDTO tokenRequest) {
 				
+		String token = tokenService.generateToken(tokenRequest.getUsername(), tokenRequest.getPassword());
 		
-		
-		return tokenService.generateToken(tokenRequest.getUsername(), tokenRequest.getPassword());
+		return new TokenResponseDTO(token);
 	}
 	
 	
