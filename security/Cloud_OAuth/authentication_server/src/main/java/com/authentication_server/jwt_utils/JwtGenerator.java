@@ -39,7 +39,7 @@ public class JwtGenerator {
 //		});
 //		
 		return builder.withIssuedAt(new Date()).withPayload(claims).withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration))
-				.withIssuer(userDetails.getUsername())
+				.withSubject(userDetails.getUsername())
 				.sign(Algorithm.HMAC256(jwtSecret));
 	}
 	

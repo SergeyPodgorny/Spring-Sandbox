@@ -27,7 +27,7 @@ public class JwtValidator {
 		DecodedJWT parsedToken = parseToken(token);
 		Boolean isTokenValid = false;
 		Boolean isTokenExpired = parsedToken.getExpiresAt().after(parsedToken.getIssuedAt());
-		Boolean isUsernameValid = parsedToken.getIssuer().equals(username);
+		Boolean isUsernameValid = parsedToken.getSubject().equals(username);
 		
 		if (isTokenExpired && isUsernameValid) {
 			isTokenValid = true;
