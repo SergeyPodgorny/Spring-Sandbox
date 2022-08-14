@@ -20,21 +20,10 @@ public class AuthApplication implements CommandLineRunner{
 
 	
 	
-	@Value("${variable.settings.security.secret}")
-	private String jwtSecret;
-	
-	
-	@Value("${variable.settings.security.expiration}")
-	private Long tokenExpirationDuration;	
-	
-	
-	@Autowired
-	JwtGenerator jwtGenerator;
-	
-	
 	
 	@Override
 	public void run(String... args) throws Exception {
+		
 		
 
 		

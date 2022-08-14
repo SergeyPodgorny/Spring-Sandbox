@@ -31,6 +31,8 @@ public class JwtGenerator {
 		
 		claims.put("token_Expiration_Date", new Date(System.currentTimeMillis() + tokenExpirationDuration).toString());
 		
+		claims.put("iss", userDetails.getUsername());
+		
 //		claims.entrySet().parallelStream().forEachOrdered((entry)->{
 //			String key = entry.getKey();
 //			String value = entry.getValue();
