@@ -37,11 +37,7 @@ public class TokenController {
 				
 		String token = tokenService.generateToken(tokenRequest.getUsername(), tokenRequest.getPassword());
 		
-		Boolean validationResult = jwtValidator.validateToken(token,tokenRequest.getUsername());
-		
-		
-		
-		logger.warn(jwtValidator.validateToken(token,tokenRequest.getUsername()).toString());	
+		logger.warn("the token for user "+ tokenRequest.getUsername() + " is valid: " + jwtValidator.validateToken(token,tokenRequest.getUsername()).toString());	
 		
 		
 		return ResponseEntity.ok(new TokenResponseDTO(token));
