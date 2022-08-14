@@ -25,7 +25,7 @@ server:
 variable:
   settings:
     security:
-      secret: secretword
+      secret: 91AF871C09F189E4774D05011843C4729A73465AE81091ADF6E421594A6C9F2B
       expiration: 10000
     
     

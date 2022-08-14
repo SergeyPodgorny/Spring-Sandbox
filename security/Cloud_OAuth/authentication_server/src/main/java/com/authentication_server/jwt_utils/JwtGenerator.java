@@ -1,6 +1,8 @@
 package com.authentication_server.jwt_utils;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,12 +27,17 @@ public class JwtGenerator {
 	public String generate(UserDetails userDetails) {
 		Builder builder = JWT.create().withSubject(userDetails.getUsername());
 		
+		Map<String,String> claims = new HashMap<>();
+		
+		claims.put("token_Expiration_Date", new Date(System.currentTimeMillis() + tokenExpirationDuration).toString());
+		
 //		claims.entrySet().parallelStream().forEachOrdered((entry)->{
 //			String key = entry.getKey();
 //			String value = entry.getValue();
 //		});
 	
-		return builder.withIssuedAt(new Date())
+		return builder.withIssuedAt(new Date()).withPayload(claims)
+				
 				.withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration)).sign(Algorithm.HMAC256(jwtSecret));
 	}
 	

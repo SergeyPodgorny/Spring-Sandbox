@@ -19,13 +19,10 @@ public class CustomUserDetailsService implements UserDetailsService{
 	private final AccountRepository accountReposiory;
 	
 	
-	
 	@Autowired
 	public CustomUserDetailsService(AccountRepository accountReposiory) {
 		this.accountReposiory = accountReposiory;
 	}
-
-
 
 
 	@Override
