@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "resources")
+@Table(name = "games_catalogue")
 public class Game {
 
 	    @Id
