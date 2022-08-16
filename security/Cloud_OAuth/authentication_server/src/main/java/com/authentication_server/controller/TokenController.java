@@ -38,20 +38,29 @@ public class TokenController {
 				
 		String token = tokenService.generateToken(tokenRequest.getUsername(), tokenRequest.getPassword());
 		
-		logger.warn("username hardwired into token: "+ jwtValidator.getUsernameFromToken(token));
-		
+	
 		return ResponseEntity.ok(new TokenResponseDTO(token));
 	}
 	
 	
+//	@GetMapping("/validate")
+//	public Boolean validateToken(@RequestBody String token) {
+//		
+//		logger.warn("the token for user "+"" + " is valid: " + jwtValidator.validateToken(token));	
+//		
+//		return jwtValidator.validateToken(token);
+//		
+//	}
+
 	@GetMapping("/validate")
-	public Boolean validateToken(@RequestBody TokenValidationDTO tokenDTO ) {
+	public String validateToken(@RequestBody String token) {
 		
-		logger.warn("the token for user "+ tokenDTO.getUsername() + " is valid: " + jwtValidator.validateToken(tokenDTO.getToken(),tokenDTO.getUsername()).toString());	
+		logger.warn("the token for user "+"" + " is valid: " + jwtValidator.validateToken(token));	
 		
-		return jwtValidator.validateToken(tokenDTO.getToken(),tokenDTO.getUsername());
+		return jwtValidator.validateToken(token);
 		
 	}
+	
 	
 	
 	

@@ -29,9 +29,9 @@ public class JwtGenerator {
 		
 		Map<String,String> claims = new HashMap<>();
 		
-		claims.put("username", userDetails.getUsername());
+		claims.put("iss", userDetails.getUsername());
 		
-		return builder.withIssuedAt(new Date()).withPayload(claims).withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration))
+		return builder.withIssuedAt(new Date()).withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration))
 				.withSubject(userDetails.getUsername()).withPayload(claims)
 				.sign(Algorithm.HMAC256(jwtSecret));
 	}
