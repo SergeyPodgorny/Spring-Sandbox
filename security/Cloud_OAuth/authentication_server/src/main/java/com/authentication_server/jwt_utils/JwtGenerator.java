@@ -29,19 +29,14 @@ public class JwtGenerator {
 		
 		Map<String,String> claims = new HashMap<>();
 		
-//		claims.put("token_Expiration_Date", new Date(System.currentTimeMillis() + tokenExpirationDuration).toString());
-//		
-//		claims.put("iss", userDetails.getUsername());
+		claims.put("username", userDetails.getUsername());
 		
-//		claims.entrySet().parallelStream().forEachOrdered((entry)->{
-//			String key = entry.getKey();
-//			String value = entry.getValue();
-//		});
-//		
 		return builder.withIssuedAt(new Date()).withPayload(claims).withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration))
-				.withSubject(userDetails.getUsername())
+				.withSubject(userDetails.getUsername()).withPayload(claims)
 				.sign(Algorithm.HMAC256(jwtSecret));
 	}
+	
+
 	
 	
 }

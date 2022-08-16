@@ -38,7 +38,7 @@ public class TokenController {
 				
 		String token = tokenService.generateToken(tokenRequest.getUsername(), tokenRequest.getPassword());
 		
-		
+		logger.warn("username hardwired into token: "+ jwtValidator.getUsernameFromToken(token));
 		
 		return ResponseEntity.ok(new TokenResponseDTO(token));
 	}

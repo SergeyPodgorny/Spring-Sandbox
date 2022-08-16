@@ -21,9 +21,7 @@ public class JwtValidator {
 	
 		
 	public Boolean validateToken(String token, String username) {
-	
-		
-		
+			
 		DecodedJWT parsedToken = parseToken(token);
 		Boolean isTokenValid = false;
 		Boolean isTokenExpired = parsedToken.getExpiresAt().after(parsedToken.getIssuedAt());
@@ -38,6 +36,14 @@ public class JwtValidator {
 				
 	}
 
+	
+	
+	public String getUsernameFromToken(String token) {
+				
+		return parseToken(token).getClaim("username").asString();
+	}
+	
+	
 	
 	private DecodedJWT parseToken(String token) {
 		return JWT.decode(token);
