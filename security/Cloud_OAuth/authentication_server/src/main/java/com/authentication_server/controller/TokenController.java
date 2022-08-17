@@ -45,8 +45,6 @@ public class TokenController {
 	
 	@GetMapping("/validate")
 	public Boolean validateToken(@RequestBody TokenValidationDTO tokenDTO) {
-		
-		logger.warn("the token for user "+ tokenDTO.getUsername() + " is valid: " + jwtValidator.validateToken(tokenDTO.getToken()));	
 	
 		return jwtValidator.validateToken(tokenDTO.getToken());
 		

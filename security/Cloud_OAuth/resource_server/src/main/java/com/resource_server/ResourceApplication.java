@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
-import com.resource_server.dto.GameRequestDTO;
-import com.resource_server.dto.GameResponseDTO;
 
 
 @SpringBootApplication

@@ -3,7 +3,6 @@ package com.authentication_server.jwt_utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +31,41 @@ public class JwtValidator {
 	
 	public Boolean validateToken(String token) {
 		
-		verifyToken(token);
+		Boolean isTokenValid = false;
+		
+		if (verifyTokenSignature(token) && verifyTokenCredentials(token)) {
+			isTokenValid = true;
+			
+			} else throw new RuntimeException("Token has not been verified");
+		
+		return isTokenValid;
+				
+	}
+
+		
+	private Boolean verifyTokenSignature(String token) {
+		
+		Boolean isTokenValid = false;
+		
+		try {
+			Verification verifier = JWT.require(Algorithm.HMAC256(jwtSecret));
+			
+			verifier.build().verify(parseToken(token));
+			
+			logger.warn("token verification for user: "+ getUsernameFromToken(token) +" completed succesfully");
+			
+			isTokenValid = true;
+			
+		} catch (Exception e) {
+			logger.error("token verification for user: "+ getUsernameFromToken(token) +" failed");
+			e.printStackTrace();
+			
+		}
+		
+		return isTokenValid;
+	}
+	
+	private Boolean verifyTokenCredentials(String token) {
 		
 		String username = getUsernameFromToken(token);
 		DecodedJWT parsedToken = parseToken(token);
@@ -40,41 +73,18 @@ public class JwtValidator {
 		Boolean isTokenExpired = parsedToken.getExpiresAt().after(parsedToken.getIssuedAt());
 		Boolean isUsernameValid = parsedToken.getSubject().equals(username);
 		
-		
-		
 		if (isTokenExpired && isUsernameValid) {
 			isTokenValid = true;
-		} else {
-			isTokenValid = false;
-		}
+			
+			} else throw new RuntimeException("Bad token credentials");
+		
 		return isTokenValid;
-				
+		
 	}
-
-	
 	
 	private String getUsernameFromToken(String token) {
 		return parseToken(token).getSubject();
 	}
-	
-	
-	private void verifyToken(String token) {
-		
-		try {
-			Verification verifier = JWT.require(Algorithm.HMAC256(jwtSecret));
-			
-			verifier.build().verify(parseToken(token));
-			logger.warn("token verification for user: "+ getUsernameFromToken(token) +"succesfully");
-		} catch (Exception e) {
-			logger.error("token verification for user: "+ getUsernameFromToken(token) +"failed");
-			e.printStackTrace();
-			
-		}
-		
-		
-
-	}
-	
 	
 	private DecodedJWT parseToken(String token) {
 		return JWT.decode(token);
