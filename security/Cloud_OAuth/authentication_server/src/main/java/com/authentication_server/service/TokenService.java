@@ -45,13 +45,13 @@ public class TokenService {
 		return jwtGenerator.generate(userDetails.loadUserByUsername(username));
 	}
 
-//	public Boolean validateToken(String token) {
-//		return jwtValidator.validateToken(token);
-//	}
-	
-	public String validateToken(String token) {
+	public Boolean validateToken(String token) {
 		return jwtValidator.validateToken(token);
 	}
+	
+//	public String validateToken(String token) {
+//		return jwtValidator.validateToken(token);
+//	}
 	
 	
 
