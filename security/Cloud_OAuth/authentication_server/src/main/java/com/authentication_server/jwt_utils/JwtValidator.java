@@ -19,12 +19,9 @@ import com.authentication_server.AuthApplication;
 
 @Component
 public class JwtValidator {
-	
-
-	
+		
 	private final Logger logger = LoggerFactory.getLogger(AuthApplication.class);
-	
-	
+		
 	@Value("${variable.settings.security.secret}")
 	private String jwtSecret;
 	
@@ -35,7 +32,7 @@ public class JwtValidator {
 		
 		if (verifyTokenSignature(token) && verifyTokenCredentials(token)) {
 			isTokenValid = true;
-			
+			logger.warn("token verification for user: "+ getUsernameFromToken(token) +" completed succesfully");
 			} else throw new RuntimeException("Token has not been verified");
 		
 		return isTokenValid;
@@ -52,12 +49,9 @@ public class JwtValidator {
 			
 			verifier.build().verify(parseToken(token));
 			
-			logger.warn("token verification for user: "+ getUsernameFromToken(token) +" completed succesfully");
-			
 			isTokenValid = true;
 			
-		} catch (Exception e) {
-			logger.error("token verification for user: "+ getUsernameFromToken(token) +" failed");
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 			
 		}
