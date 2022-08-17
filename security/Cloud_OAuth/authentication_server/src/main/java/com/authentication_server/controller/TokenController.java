@@ -24,6 +24,7 @@ public class TokenController {
 	
 	private final TokenService tokenService;
 	
+	
 	@Autowired
 	public TokenController(JwtValidator jwtValidator, TokenService tokenService) {
 		this.jwtValidator = jwtValidator;
