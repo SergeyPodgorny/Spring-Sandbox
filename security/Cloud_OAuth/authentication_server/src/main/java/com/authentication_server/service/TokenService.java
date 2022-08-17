@@ -48,10 +48,7 @@ public class TokenService {
 	public Boolean validateToken(String token) {
 		return jwtValidator.validateToken(token);
 	}
-	
-//	public String validateToken(String token) {
-//		return jwtValidator.validateToken(token);
-//	}
+
 	
 	
 

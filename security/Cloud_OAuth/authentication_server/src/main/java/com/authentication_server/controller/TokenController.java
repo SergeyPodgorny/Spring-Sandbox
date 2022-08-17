@@ -38,7 +38,6 @@ public class TokenController {
 				
 		String token = tokenService.generateToken(tokenRequest.getUsername(), tokenRequest.getPassword());
 		
-	
 		return ResponseEntity.ok(new TokenResponseDTO(token));
 	}
 	
