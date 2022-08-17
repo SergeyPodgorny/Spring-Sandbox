@@ -49,15 +49,6 @@ public class TokenController {
 		return jwtValidator.validateToken(tokenDTO.getToken());
 		
 	}
-
-//	@GetMapping("/validate")
-//	public String validateToken(@RequestBody TokenValidationDTO tokenDTO) {
-//		
-//		logger.warn("the token for user "+"" + " is valid: " + jwtValidator.validateToken(tokenDTO.getToken()));	
-//		
-//		return jwtValidator.validateToken(tokenDTO.getToken());
-//		
-//	}
 	
 	
 	
