@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.resource_server.dto.GameRequestDTO;
 import com.resource_server.dto.GameResponseDTO;
+import com.resource_server.jwt_utils.JwtFilter;
 import com.resource_server.service.GameService;
 
 @RestController
@@ -24,26 +25,38 @@ public class GameController {
 	
 	private RestTemplate restTemplate;
 	
+	private JwtFilter jwtFilter;
 	
-	@Autowired	
-	public GameController(GameService gameService, RestTemplate restTemplate) {
+
+
+	
+
+
+	@Autowired
+	public GameController(GameService gameService, RestTemplate restTemplate, JwtFilter jwtFilter) {
 		this.gameService = gameService;
 		this.restTemplate = restTemplate;
+		this.jwtFilter = jwtFilter;
 	}
 
 
 
-
 	@GetMapping("/rest")
-	public String getAllGames(){
+	public List<GameResponseDTO> getAllGames(){
+//		
+//		HttpHeaders headers = new HttpHeaders();
+//		
+//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//		
+//		HttpEntity<String> entity = new HttpEntity<>(headers);	
+//		
+//		return restTemplate.exchange("http://localhost:8090/games/getAll", HttpMethod.GET, entity, String.class).getBody();
 		
-		HttpHeaders headers = new HttpHeaders();
 		
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		
-		HttpEntity<String> entity = new HttpEntity<>(headers);	
+		return gameService.findAll();
 		
-		return restTemplate.exchange("http://localhost:8090/games/getAll", HttpMethod.GET, entity, String.class).getBody();
+		
 	}
 
 
