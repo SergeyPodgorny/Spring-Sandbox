@@ -57,25 +57,25 @@ public class JwtFilter extends OncePerRequestFilter {
 		} else throw new RuntimeException("Request doesn't contain any suitable header");
 		
 		
-		try {
+//		try {
 			
-//			HttpHeaders headers = new HttpHeaders();
+			HttpHeaders headers = new HttpHeaders();
+			
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			
+			HttpEntity<String> entity = new HttpEntity<>(token,headers);	
+			
+			isTokenValid = restTemplate.exchange("http://localhost:8090/validate", HttpMethod.GET, entity, Boolean.class).getBody();
+			
+//			request1 = new HttpEntity<>(token);
 //			
-//			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//			
-//			HttpEntity<Boolean> entity = new HttpEntity<>(headers);	
+//			response1 = restTemplate.exchange("http://localhost:8090/validate", HttpMethod.GET, request1, String.class);
 			
-//			isTokenValid = restTemplate.exchange("http://localhost:8090/validate", HttpMethod.GET, entity, Boolean.class).getBody();
-			
-			request1 = new HttpEntity<>(token);
-			
-			response1 = restTemplate.postForEntity("http://localhost:8090/validate", request1, String.class);
-			
-		} catch (RuntimeException e) {
-			throw new RuntimeException("token validation failed");
-		}
+//		} catch (RuntimeException e) {
+//			throw new RuntimeException("token validation failed");
+//		}
 		
-		logger.info(response1.toString());
+		logger.info(isTokenValid .toString());
 		
 		logger.info(token);
 		
