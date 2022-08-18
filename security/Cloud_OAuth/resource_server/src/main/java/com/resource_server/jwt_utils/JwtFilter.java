@@ -45,11 +45,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		
 		String token;
 		
-		Boolean isTokenValid;
-		
-		HttpEntity<String> request1;
-		
-		ResponseEntity<String> response1;
+		String isTokenValid;
 		
 		
 		if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
@@ -57,7 +53,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		} else throw new RuntimeException("Request doesn't contain any suitable header");
 		
 		
-//		try {
+		try {
 			
 			HttpHeaders headers = new HttpHeaders();
 			
@@ -65,15 +61,15 @@ public class JwtFilter extends OncePerRequestFilter {
 			
 			HttpEntity<String> entity = new HttpEntity<>(token,headers);	
 			
-			isTokenValid = restTemplate.exchange("http://localhost:8090/validate", HttpMethod.GET, entity, Boolean.class).getBody();
+			isTokenValid = restTemplate.exchange("http://localhost:8090/validate", HttpMethod.GET, entity, String.class).getBody();
 			
 //			request1 = new HttpEntity<>(token);
 //			
 //			response1 = restTemplate.exchange("http://localhost:8090/validate", HttpMethod.GET, request1, String.class);
 			
-//		} catch (RuntimeException e) {
-//			throw new RuntimeException("token validation failed");
-//		}
+		} catch (RuntimeException e) {
+			throw new RuntimeException("token validation failed");
+		}
 		
 		logger.info(isTokenValid .toString());
 		

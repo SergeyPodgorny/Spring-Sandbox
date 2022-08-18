@@ -1,5 +1,6 @@
 package com.authentication_server.controller;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class TokenController {
 	
 	@GetMapping("/validate")
 	public TokenValidationResponseDTO validateToken(@RequestBody TokenValidationRequestDTO tokenDTO) {
-	
+		JSONObject obj = new JSONObject();
 		return new TokenValidationResponseDTO(jwtValidator.validateToken(tokenDTO.getToken()));
 		
 	}

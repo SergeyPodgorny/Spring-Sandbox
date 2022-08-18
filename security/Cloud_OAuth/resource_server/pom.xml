@@ -33,6 +33,17 @@
       <artifactId>flyway-core</artifactId>
     </dependency>
     
+    
+    
+    <!-- https://mvnrepository.com/artifact/org.json/json -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20220320</version>
+</dependency>
+
+    
+    
         <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
