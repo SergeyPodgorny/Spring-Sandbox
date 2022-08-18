@@ -43,17 +43,6 @@ public class GameController {
 
 	@GetMapping("/rest")
 	public List<GameResponseDTO> getAllGames(){
-//		
-//		HttpHeaders headers = new HttpHeaders();
-//		
-//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//		
-//		HttpEntity<String> entity = new HttpEntity<>(headers);	
-//		
-//		return restTemplate.exchange("http://localhost:8090/games/getAll", HttpMethod.GET, entity, String.class).getBody();
-		
-		
-		
 		return gameService.findAll();
 		
 		
