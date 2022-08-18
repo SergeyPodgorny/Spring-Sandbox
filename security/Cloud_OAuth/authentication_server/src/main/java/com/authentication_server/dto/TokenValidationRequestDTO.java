@@ -1,17 +1,17 @@
 package com.authentication_server.dto;
 
-public class TokenValidationDTO {
+public class TokenValidationRequestDTO {
 	
 	
 	
 	private String token;
 	
 	
-	public TokenValidationDTO() {
+	public TokenValidationRequestDTO() {
 	
 	}
 
-	public TokenValidationDTO(String token) {
+	public TokenValidationRequestDTO(String token) {
 		this.token = token;
 	}
 

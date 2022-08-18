@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.authentication_server.AuthApplication;
 import com.authentication_server.dto.TokenRequestDTO;
 import com.authentication_server.dto.TokenResponseDTO;
-import com.authentication_server.dto.TokenValidationDTO;
+import com.authentication_server.dto.TokenValidationRequestDTO;
+import com.authentication_server.dto.TokenValidationResponseDTO;
 import com.authentication_server.jwt_utils.JwtValidator;
 import com.authentication_server.service.TokenService;
 
@@ -44,9 +45,9 @@ public class TokenController {
 	
 	
 	@GetMapping("/validate")
-	public Boolean validateToken(@RequestBody TokenValidationDTO tokenDTO) {
+	public ResponseEntity<TokenValidationResponseDTO> validateToken(@RequestBody TokenValidationRequestDTO tokenDTO) {
 	
-		return jwtValidator.validateToken(tokenDTO.getToken());
+		return ResponseEntity.ok(new TokenValidationResponseDTO(jwtValidator.validateToken(tokenDTO.getToken())));
 		
 	}
 	
