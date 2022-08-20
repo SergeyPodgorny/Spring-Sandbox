@@ -1,26 +1,19 @@
 package com.resource_server.jwt_utils;
 
 import java.io.IOException;
-import java.util.Arrays;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -36,14 +29,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	private HttpHeaders headers;
 	
-	private JSONObject jsonObject;
 	
 
 	@Autowired
-	public JwtFilter(RestTemplate restTemplate, HttpHeaders headers, JSONObject jsonObject) {
+	public JwtFilter(RestTemplate restTemplate, HttpHeaders headers) {
 		this.restTemplate = restTemplate;
 		this.headers = headers;
-		this.jsonObject = jsonObject;
 	}
 
 
@@ -52,8 +43,7 @@ public class JwtFilter extends OncePerRequestFilter {
 	}
 	
 	private String tokenValidationUrl = "http://localhost:8090/validate";
-	
-	private String tokenValidationUrl1 = "http://localhost:8080/hello";
+
 	
 	
 	
@@ -63,145 +53,32 @@ public class JwtFilter extends OncePerRequestFilter {
 		String tokenHeader = request.getHeader("Authorization");
 		
 	    String token = tokenHeader.substring(7);
-		
-//	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    
+	    logger.info(token);
 	    
 	    headers.add("token", token);
 	    
-//	    JSONObject tokenBody = jsonObject.put("token", token);
-
 	    HttpEntity<Boolean> httpEntity =  new HttpEntity<Boolean>(headers);
 	    
-	    if (restTemplate.exchange(tokenValidationUrl, HttpMethod.GET, httpEntity, Boolean.class).getBody()) {
+	    Boolean isTokenValid = restTemplate.exchange(tokenValidationUrl, HttpMethod.GET, httpEntity, Boolean.class).getBody();
+	    
+	    
+	    if (isTokenValid) {
 	    	
 	    	filterChain.doFilter(request, response);
 	    	
 	    } else throw new RuntimeException("validation failed");
 	    
+	    
+		response = null;
+		request = null;
+	    
+	    token = "";
+	    
+	    logger.info(token);
+	    
 	}
 	
-	
-	
-//    try {
-//	
-//	
-//	
-//	
-//	logger.info(restTemplate.exchange(tokenValidationUrl, HttpMethod.GET, httpEntity, Boolean.class).getBody().toString());
-//	
-//	
-//	
-//	
-//} catch (RuntimeException e) {
-//	throw new RuntimeException("validation falied");
-//} finally {
-//	logger.info("request filtered");
-//	logger.info(tokenHeader);
-//	logger.info(token);  	
-//	logger.info(httpEntity.getHeaders().toString());
-//	
-//	
-//}
-	
-	
-	
-//
-//	@Override
-//	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//		
-////		
-////	
-////		String token = null;
-////
-////		JSONObject tokenBody;
-////		
-////		String result = null;
-//
-//		
-//		HttpHeaders headers = new HttpHeaders();
-//		
-//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//		
-//		HttpEntity <String> entity = new HttpEntity<String>(headers);
-//		
-//		RestTemplate restTemplate = new RestTemplate();
-//		
-//		restTemplate.exchange("http://localhost:8080/products", HttpMethod.GET, entity, String.class).getBody();
-//		
-//		logger.info("request filtered");
-//		
-//		
-//		
-//	}
-		
-		
-		
-		
-		
-//		try {
-					   
-//		    token = tokenHeader.substring(7);
-//		    
-//		    JSONObject jsonObj = new JSONObject(); 
-//		    		    
-//		    tokenBody = jsonObject.put("token", token);
-//		    
-//		    HttpHeaders headers = new HttpHeaders();
-//		    
-//		    headers.setContentType(MediaType.APPLICATION_JSON);
-//		    		    
-//		    HttpEntity<String> entity =  new HttpEntity<String>(tokenBody.toString(), headers);
-//			       	  
-		    
-		    
-//    	    result = restTemplate.postForObject(tokenValidationUrl ,request, String.class);
-			
-//		    result = restTemplate.exchange("tokenValidationUrl", HttpMethod.GET, entity, String.class).getBody();
-
-//		    
-//		    RestTemplate restTemplate = new RestTemplate();
-//		    
-//		    HttpEntity<String> entity1 =  new HttpEntity<String>( headers);
-//		    
-//		    restTemplate.exchange("tokenValidationUrl1", HttpMethod.GET, entity1, String.class).getBody();
-		    
-		    
-//		    token = tokenHeader.substring(7);
-//		   	    
-//		    tokenBody = jsonObject.put("token", token);
-//		    
-//		    HttpEntity<String> entity =  new HttpEntity<String>(tokenBody.toString(), headers);
-//			       	    
-//    	    result = restTemplate.postForObject(tokenValidationUrl ,request, String.class);
-//					    
-//		    result = restTemplate.exchange("tokenValidationUrl", HttpMethod.GET, entity, String.class).getBody();
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-			
-//		} catch (RuntimeException e) {
-//			throw new RuntimeException("token validation failed");
-//		} finally {
-//			
-//			logger.info(result);
-//			
-//			logger.info(token);
-//			
-//			logger.info(request.getHeader("Authorization"));
-//		}
-		
-
-		
-//	}
-
 	
 
 }

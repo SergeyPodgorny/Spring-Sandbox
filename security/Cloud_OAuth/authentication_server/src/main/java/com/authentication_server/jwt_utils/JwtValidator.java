@@ -32,7 +32,7 @@ public class JwtValidator {
 		
 		if (verifyTokenSignature(token) && verifyTokenCredentials(token)) {
 			isTokenValid = true;
-			logger.warn("token verification for user: "+ getUsernameFromToken(token) +" completed succesfully");
+			logger.warn("token verification for user: "+ getUsernameFromToken(token) +" with expiration date: " + parseToken(token).getExpiresAt() + " completed succesfully");
 			} else throw new RuntimeException("Token has not been verified");
 		
 		return isTokenValid;

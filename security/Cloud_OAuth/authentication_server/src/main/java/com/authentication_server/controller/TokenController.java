@@ -3,22 +3,20 @@ package com.authentication_server.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.authentication_server.AuthApplication;
 import com.authentication_server.dto.TokenRequestDTO;
 import com.authentication_server.dto.TokenResponseDTO;
-import com.authentication_server.dto.TokenValidationRequestDTO;
-import com.authentication_server.dto.TokenValidationResponseDTO;
 import com.authentication_server.jwt_utils.JwtValidator;
 import com.authentication_server.service.TokenService;
 
@@ -49,16 +47,20 @@ public class TokenController {
 		
 		return ResponseEntity.ok(new TokenResponseDTO(token));
 	}
-//	consumes = "application/json", produces = "application/json"
 	
 	@GetMapping("/validate")
 	public Boolean validateToken(HttpServletResponse response, HttpServletRequest request) {
-				
-		logger.info(request.getHeader("token"));
-		return jwtValidator.validateToken(request.getHeader("token"));
+		String token = request.getHeader("token");
+		logger.info(token);
+		Boolean isTokeValid = jwtValidator.validateToken(token);
+		token = null;
 		
+		response = null;
+		request = null;
 		
-//		return new TokenValidationResponseDTO(jwtValidator.validateToken(tokenDTO.getToken())).toString();
+		logger.info(token);
+		return isTokeValid;
+		
 		
 	}
 	
