@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import com.authentication_server.jwt_utils.JwtValidator;
 import com.authentication_server.service.TokenService;
 
 @RestController
+@CrossOrigin
 public class TokenController {
 	
 	private final Logger logger = LoggerFactory.getLogger(AuthApplication.class);
@@ -46,9 +48,9 @@ public class TokenController {
 	}
 	
 	
-	@GetMapping("/validate")
+	@GetMapping(value = "/validate", consumes = "application/json", produces = "application/json")
 	public TokenValidationResponseDTO validateToken(@RequestBody TokenValidationRequestDTO tokenDTO) {
-		JSONObject obj = new JSONObject();
+		logger.info(tokenDTO.getToken());
 		return new TokenValidationResponseDTO(jwtValidator.validateToken(tokenDTO.getToken()));
 		
 	}
