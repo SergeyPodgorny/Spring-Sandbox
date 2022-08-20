@@ -25,7 +25,6 @@ import com.resource_server.ResourceApplication;
 
 
 @Component
-@CrossOrigin
 public class JwtFilter extends OncePerRequestFilter {
 
 	
@@ -39,7 +38,7 @@ public class JwtFilter extends OncePerRequestFilter {
 	
 	private String tokenValidationUrl = "http://localhost:8090/validate";
 	
-	
+	private String tokenValidationUrl1 = "http://localhost:8090/games/getAll";
 	
 	@Autowired
 	public JwtFilter(JSONObject jsonObject, RestTemplate restTemplate, HttpHeaders headers) {
@@ -57,34 +56,61 @@ public class JwtFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		
 		String tokenHeader = request.getHeader("Authorization");
-		
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		
+	
 		String token = null;
-		
-		String isTokenValid;
-				
+
 		JSONObject tokenBody;
 		
 		String result = null;
-		 
-//		if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
-//			
-//		} else throw new RuntimeException("Request doesn't contain any suitable header");
-		
-		
+
 		try {
 					   
 		    token = tokenHeader.substring(7);
 		    
+		    JSONObject jsonObj = new JSONObject(); 
+		    		    
 		    tokenBody = jsonObject.put("token", token);
 		    
+		    HttpHeaders headers = new HttpHeaders();
+		    
+		    headers.setContentType(MediaType.APPLICATION_JSON);
+		    		    
 		    HttpEntity<String> entity =  new HttpEntity<String>(tokenBody.toString(), headers);
-			       	    
+			       	  
+		    
+		    
 //    	    result = restTemplate.postForObject(tokenValidationUrl ,request, String.class);
 			
-		    result = restTemplate.exchange("tokenValidationUrl", HttpMethod.GET, entity, String.class).getBody();
+//		    result = restTemplate.exchange("tokenValidationUrl", HttpMethod.GET, entity, String.class).getBody();
 
+		    
+		    RestTemplate restTemplate = new RestTemplate();
+		    
+		    HttpEntity<String> entity1 =  new HttpEntity<String>( headers);
+		    
+		    restTemplate.exchange("tokenValidationUrl1", HttpMethod.GET, entity1, String.class).getBody();
+		    
+		    
+//		    token = tokenHeader.substring(7);
+//		   	    
+//		    tokenBody = jsonObject.put("token", token);
+//		    
+//		    HttpEntity<String> entity =  new HttpEntity<String>(tokenBody.toString(), headers);
+//			       	    
+//    	    result = restTemplate.postForObject(tokenValidationUrl ,request, String.class);
+//					    
+//		    result = restTemplate.exchange("tokenValidationUrl", HttpMethod.GET, entity, String.class).getBody();
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
 			
 		} catch (RuntimeException e) {
 			throw new RuntimeException("token validation failed");

@@ -5,17 +5,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 
-@Configuration
+//@Configuration
 public class MiscellaneousConfiguration {
 
 	
-	@Bean
+//	@Bean
 	public JSONObject jsonObject() {
 		return new JSONObject();
 	}
 	
 	
-	@Bean
+//	@Bean
 	public HttpHeaders headers() {
 		return new HttpHeaders();
 	}
