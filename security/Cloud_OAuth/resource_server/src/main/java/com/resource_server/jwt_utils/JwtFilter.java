@@ -32,29 +32,76 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	private final Logger logger = LoggerFactory.getLogger(ResourceApplication.class);
 	
+	private RestTemplate restTemplate;
+
+	private HttpHeaders headers;
+	
+	private JSONObject jsonObject;
+	
+
+	@Autowired
+	public JwtFilter(RestTemplate restTemplate, HttpHeaders headers, JSONObject jsonObject) {
+		this.restTemplate = restTemplate;
+		this.headers = headers;
+		this.jsonObject = jsonObject;
+	}
+
+
+	public JwtFilter() {
+	
+	}
+	
 	private String tokenValidationUrl = "http://localhost:8090/validate";
 	
 	private String tokenValidationUrl1 = "http://localhost:8080/hello";
-
-		
+	
+	
+	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+		String tokenHeader = request.getHeader("Authorization");
 		
-		logger.info("request filtered");
+	    String token = tokenHeader.substring(7);
 		
-		HttpHeaders headers = new HttpHeaders();
-		
-	    RestTemplate restTemplate = new RestTemplate();
+//	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    
-	    HttpEntity<String> entity1 =  new HttpEntity<String>(headers);
+	    headers.add("token", token);
 	    
-	    logger.info(restTemplate.exchange(tokenValidationUrl1, HttpMethod.GET, entity1, String.class).getBody());
+//	    JSONObject tokenBody = jsonObject.put("token", token);
+
+	    HttpEntity<String> httpEntity =  new HttpEntity<String>(headers);
+	    
+	    try {
+	    	
+	    	
+	    	
+	    	
+	    	logger.info(restTemplate.exchange(tokenValidationUrl, HttpMethod.GET, httpEntity, String.class).getBody());
+	    	
+	    	
+	    	
+	    	
+	    } catch (RuntimeException e) {
+	    	throw new RuntimeException("validation falied");
+	    } finally {
+	    	logger.info("request filtered");
+	    	logger.info(tokenHeader);
+	    	logger.info(token);  	
+	    	logger.info(httpEntity.getHeaders().toString());
+	    	
+	    	
+	    }
 	    
 	    
-		
-//	    restTemplate.postForObject(tokenValidationUrl1 ,request, String.class);
-		
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 		filterChain.doFilter(request, response);
 		
 		
@@ -62,20 +109,11 @@ public class JwtFilter extends OncePerRequestFilter {
 	}
 	
 	
-	
-
-
-//
-//
-//	
-//	public JwtFilter() {
-//	
-//	}
 //
 //	@Override
 //	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 //		
-////		String tokenHeader = request.getHeader("Authorization");
+////		
 ////	
 ////		String token = null;
 ////

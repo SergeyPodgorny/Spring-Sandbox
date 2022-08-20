@@ -1,5 +1,8 @@
 package com.authentication_server.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,12 +49,17 @@ public class TokenController {
 		
 		return ResponseEntity.ok(new TokenResponseDTO(token));
 	}
+//	consumes = "application/json", produces = "application/json"
 	
-	
-	@GetMapping(value = "/validate", consumes = "application/json", produces = "application/json")
-	public TokenValidationResponseDTO validateToken(@RequestBody TokenValidationRequestDTO tokenDTO) {
-		logger.info(tokenDTO.getToken());
-		return new TokenValidationResponseDTO(jwtValidator.validateToken(tokenDTO.getToken()));
+	@GetMapping("/validate")
+	public String validateToken(HttpServletResponse response, HttpServletRequest request) {
+		
+		
+		logger.info(request.getHeader("token"));
+		return request.getHeader("token");
+		
+		
+//		return new TokenValidationResponseDTO(jwtValidator.validateToken(tokenDTO.getToken())).toString();
 		
 	}
 	
