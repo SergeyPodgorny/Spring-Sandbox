@@ -70,43 +70,39 @@ public class JwtFilter extends OncePerRequestFilter {
 	    
 //	    JSONObject tokenBody = jsonObject.put("token", token);
 
-	    HttpEntity<String> httpEntity =  new HttpEntity<String>(headers);
+	    HttpEntity<Boolean> httpEntity =  new HttpEntity<Boolean>(headers);
 	    
-	    try {
+	    if (restTemplate.exchange(tokenValidationUrl, HttpMethod.GET, httpEntity, Boolean.class).getBody()) {
 	    	
+	    	filterChain.doFilter(request, response);
 	    	
-	    	
-	    	
-	    	logger.info(restTemplate.exchange(tokenValidationUrl, HttpMethod.GET, httpEntity, String.class).getBody());
-	    	
-	    	
-	    	
-	    	
-	    } catch (RuntimeException e) {
-	    	throw new RuntimeException("validation falied");
-	    } finally {
-	    	logger.info("request filtered");
-	    	logger.info(tokenHeader);
-	    	logger.info(token);  	
-	    	logger.info(httpEntity.getHeaders().toString());
-	    	
-	    	
-	    }
+	    } else throw new RuntimeException("validation failed");
 	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-		filterChain.doFilter(request, response);
-		
-		
-		
 	}
+	
+	
+	
+//    try {
+//	
+//	
+//	
+//	
+//	logger.info(restTemplate.exchange(tokenValidationUrl, HttpMethod.GET, httpEntity, Boolean.class).getBody().toString());
+//	
+//	
+//	
+//	
+//} catch (RuntimeException e) {
+//	throw new RuntimeException("validation falied");
+//} finally {
+//	logger.info("request filtered");
+//	logger.info(tokenHeader);
+//	logger.info(token);  	
+//	logger.info(httpEntity.getHeaders().toString());
+//	
+//	
+//}
+	
 	
 	
 //

@@ -52,11 +52,10 @@ public class TokenController {
 //	consumes = "application/json", produces = "application/json"
 	
 	@GetMapping("/validate")
-	public String validateToken(HttpServletResponse response, HttpServletRequest request) {
-		
-		
+	public Boolean validateToken(HttpServletResponse response, HttpServletRequest request) {
+				
 		logger.info(request.getHeader("token"));
-		return request.getHeader("token");
+		return jwtValidator.validateToken(request.getHeader("token"));
 		
 		
 //		return new TokenValidationResponseDTO(jwtValidator.validateToken(tokenDTO.getToken())).toString();
