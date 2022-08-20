@@ -28,8 +28,7 @@ public class GameController {
 	private final Logger logger = LoggerFactory.getLogger(ResourceApplication.class);
 	
 	private GameService gameService;
-	
-	private RestTemplate restTemplate;
+
 	
 	private JwtFilter jwtFilter;
 	
@@ -37,9 +36,8 @@ public class GameController {
 
 
 	@Autowired
-	public GameController(GameService gameService, RestTemplate restTemplate, JwtFilter jwtFilter) {
+	public GameController(GameService gameService, JwtFilter jwtFilter) {
 		this.gameService = gameService;
-		this.restTemplate = restTemplate;
 		this.jwtFilter = jwtFilter;
 	}
 

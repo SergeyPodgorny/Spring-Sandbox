@@ -12,9 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class ResourceApplication implements CommandLineRunner {
 
 	
-	@Autowired
-	private RestTemplate restTemplate;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(ResourceApplication.class, args);
 	}
