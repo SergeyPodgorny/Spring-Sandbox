@@ -50,16 +50,17 @@ public class TokenController {
 	
 	@GetMapping("/validate")
 	public Boolean validateToken(HttpServletResponse response, HttpServletRequest request) {
-		String token = request.getHeader("token");
-		logger.info(token);
-		Boolean isTokeValid = jwtValidator.validateToken(token);
-		token = null;
+		String token = request.getHeader("token");		
+		logger.info("incoming token  "+ request.getHeader("token"));
 		
-		response = null;
-		request = null;
+		logger.info("outcoming token  "+response.getHeader("token"));
 		
-		logger.info(token);
-		return isTokeValid;
+		
+//		Boolean isTokenValid = true;
+		
+		Boolean isTokenValid = jwtValidator.validateToken(token);
+				
+		return isTokenValid;
 		
 		
 	}
