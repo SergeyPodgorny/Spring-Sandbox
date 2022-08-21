@@ -28,10 +28,10 @@ public class WebSecurityConfiguration {
 //		return authenticationConfiguration.getAuthenticationManager();
 //	}
 
-	   @Bean
-	   public PasswordEncoder passwordEncoder() {
-	      return new BCryptPasswordEncoder();
-	   }
+	 @Bean
+	 public PasswordEncoder passwordEncoder() {
+	     return new BCryptPasswordEncoder();
+	 }
 	
 	
 	

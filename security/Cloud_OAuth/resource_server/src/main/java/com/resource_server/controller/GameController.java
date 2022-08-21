@@ -43,7 +43,7 @@ public class GameController {
 
 
 
-	@GetMapping("/rest")
+	@GetMapping("/getAll")
 	public List<GameResponseDTO> getAllGames(){
 		return gameService.findAll();
 		
@@ -51,7 +51,10 @@ public class GameController {
 	}
 
 
-
+	@GetMapping("/test")
+	public String youShouldNotSeeThisMessage() {
+		return "If you see this message close the browser!";
+	}
 	
 	
 	
