@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.resource_server.ResourceApplication;
 import com.resource_server.dto.GameResponseDTO;
-import com.resource_server.jwt_utils.JwtFilter;
 import com.resource_server.service.GameService;
 
 @RestController
