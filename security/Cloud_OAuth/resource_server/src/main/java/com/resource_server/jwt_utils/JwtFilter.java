@@ -25,17 +25,17 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	private final Logger logger = LoggerFactory.getLogger(ResourceApplication.class);
 	
-//	private RestTemplate restTemplate;
+	private RestTemplate restTemplate;
 
-//	private HttpHeaders headers;
+	private HttpHeaders headers;
 	
 	
 
-//	@Autowired
-//	public JwtFilter(RestTemplate restTemplate, HttpHeaders headers) {
-//		this.restTemplate = restTemplate;
-//		this.headers = headers;
-//	}
+	@Autowired
+	public JwtFilter(RestTemplate restTemplate, HttpHeaders headers) {
+		this.restTemplate = restTemplate;
+		this.headers = headers;
+	}
 
 
 	public JwtFilter() {
@@ -49,18 +49,12 @@ public class JwtFilter extends OncePerRequestFilter {
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
-		
-		HttpHeaders headers = new HttpHeaders();
-		
-		RestTemplate restTemplate = new RestTemplate();
-		
 		
 		String tokenHeader = request.getHeader("Authorization");
 		
 	    String token = tokenHeader.substring(7);
 	    
-	    logger.info(token);
+	    logger.info("incoming token: "+token);
 	    
 	    headers.add("token", token);
 	    
@@ -68,20 +62,13 @@ public class JwtFilter extends OncePerRequestFilter {
 	    
 	    Boolean isTokenValid = restTemplate.exchange(tokenValidationUrl, HttpMethod.GET, httpEntity, Boolean.class).getBody();
 	    
+	    headers.remove("token");
 	    
 	    if (isTokenValid) {
 	    	
 	    	filterChain.doFilter(request, response);
 	    	
-	    } else throw new RuntimeException("validation failed");
-	    
-	    
-		response = null;
-		request = null;
-	    
-	    token = "";
-	    
-	    logger.info(token);
+	    } else throw new RuntimeException("token validation failed");
 	    
 	}
 	

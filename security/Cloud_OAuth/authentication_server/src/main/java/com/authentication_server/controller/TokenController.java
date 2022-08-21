@@ -1,8 +1,6 @@
 package com.authentication_server.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,18 +47,14 @@ public class TokenController {
 	}
 	
 	@GetMapping("/validate")
-	public Boolean validateToken(HttpServletResponse response, HttpServletRequest request) {
-		String token = request.getHeader("token");		
-		logger.info("incoming token  "+ request.getHeader("token"));
+	public Boolean validateToken(HttpServletRequest request) {
+		String incomingToken = request.getHeader("token");	
 		
-		logger.info("outcoming token  "+response.getHeader("token"));
-		
-		
-//		Boolean isTokenValid = true;
-		
-		Boolean isTokenValid = jwtValidator.validateToken(token);
+		logger.info("incoming token: "+ request.getHeader("token"));
+			
+		Boolean isIncomingTokenValid = jwtValidator.validateToken(incomingToken);
 				
-		return isTokenValid;
+		return isIncomingTokenValid;
 		
 		
 	}
