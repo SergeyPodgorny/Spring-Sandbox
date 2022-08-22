@@ -22,8 +22,8 @@ public class JwtValidator {
 		
 	private final Logger logger = LoggerFactory.getLogger(AuthApplication.class);
 		
-	@Value("${variable.settings.security.secret}")
-	private String jwtSecret;
+	@Value("${variable.settings.security.access_secret}")
+	private String jwtAccessSecret;
 	
 	
 	public Boolean validateToken(String token) {
@@ -45,7 +45,7 @@ public class JwtValidator {
 		Boolean isTokenValid = false;
 		
 		try {
-			Verification verifier = JWT.require(Algorithm.HMAC256(jwtSecret));
+			Verification verifier = JWT.require(Algorithm.HMAC256(jwtAccessSecret));
 			
 			verifier.build().verify(parseToken(token));
 			

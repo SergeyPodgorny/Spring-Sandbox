@@ -22,10 +22,10 @@ public class JwtGenerator {
 	private Long accessTokenExpirationDuration;	
 	
 	
-	@Value("${variable.settings.security.secret}")
+	@Value("${variable.settings.security.refresh_secret}")
 	private String jwtRefreshSecret;
 	
-	@Value("${variable.settings.security.expiration}")
+	@Value("${variable.settings.security.refresh_expiration}")
 	private Long refreshTokenExpirationDuration;	
 	
 	
