@@ -1,8 +1,6 @@
 package com.authentication_server.jwt_utils;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,19 +15,27 @@ import com.auth0.jwt.algorithms.Algorithm;
 @Component
 public class JwtGenerator {
 
-	@Value("${variable.settings.security.secret}")
-	private String jwtSecret;
+	@Value("${variable.settings.security.access_secret}")
+	private String jwtAccessSecret;
 	
+	@Value("${variable.settings.security.access_expiration}")
+	private Long accessTokenExpirationDuration;	
+	
+	
+	@Value("${variable.settings.security.secret}")
+	private String jwtRefreshSecret;
 	
 	@Value("${variable.settings.security.expiration}")
-	private Long tokenExpirationDuration;	
+	private Long refreshTokenExpirationDuration;	
+	
+	
 
-	public String generate(UserDetails userDetails) {
+	public String generateAccessToken(UserDetails userDetails) {
 		Builder builder = JWT.create().withSubject(userDetails.getUsername());
 		
-		return builder.withIssuedAt(new Date()).withExpiresAt(new Date(System.currentTimeMillis() + tokenExpirationDuration))
+		return builder.withIssuedAt(new Date()).withExpiresAt(new Date(System.currentTimeMillis() + accessTokenExpirationDuration))
 				.withSubject(userDetails.getUsername())
-				.sign(Algorithm.HMAC256(jwtSecret));
+				.sign(Algorithm.HMAC256(jwtAccessSecret));
 	}
 	
 
