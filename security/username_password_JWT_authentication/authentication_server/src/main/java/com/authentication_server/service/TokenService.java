@@ -1,6 +1,8 @@
 package com.authentication_server.service;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import com.authentication_server.jwt_utils.JwtValidator;
 
 @Service
 @CrossOrigin
+
 public class TokenService {
 	
 	private final Logger logger = LoggerFactory.getLogger(AuthApplication.class);
@@ -51,8 +54,6 @@ public class TokenService {
 //	}
 
 
-
-
 	public String generateToken(String username, String password) {
 		
 		
@@ -74,6 +75,14 @@ public class TokenService {
 	}
 
 	
-	
+	public String removeUserFromSession(String token) {
+
+		String username = jwtValidator.getUsernameFromToken(token);
+		
+		return "User: "+ username +" loggedout";
+		
+		
+		
+	}
 
 }

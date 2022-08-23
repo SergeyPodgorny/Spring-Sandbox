@@ -59,7 +59,10 @@ public class TokenController {
 		
 	}
 	
-	
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		return tokenService.removeUserFromSession(request.getHeader("token"));
+	}
 	
 	
 }

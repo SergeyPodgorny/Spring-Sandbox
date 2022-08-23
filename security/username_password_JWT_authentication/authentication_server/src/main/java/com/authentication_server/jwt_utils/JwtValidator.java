@@ -39,7 +39,12 @@ public class JwtValidator {
 				
 	}
 
-		
+	
+	public String getUsernameFromToken(String token) {
+		return parseToken(token).getSubject();
+	}
+	
+	
 	private Boolean verifyTokenSignature(String token) {
 		
 		Boolean isTokenValid = false;
@@ -76,9 +81,7 @@ public class JwtValidator {
 		
 	}
 	
-	private String getUsernameFromToken(String token) {
-		return parseToken(token).getSubject();
-	}
+
 	
 	private DecodedJWT parseToken(String token) {
 		return JWT.decode(token);
