@@ -2,6 +2,8 @@ package com.authentication_server.jwt_utils;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -38,7 +40,14 @@ public class JwtGenerator {
 				.sign(Algorithm.HMAC256(jwtAccessSecret));
 	}
 	
-
-	
+	@PostConstruct
+	public void print() {
+		System.out.println(jwtAccessSecret);
+		System.out.println(accessTokenExpirationDuration);
+		
+		
+		System.out.println(jwtRefreshSecret);
+		System.out.println(refreshTokenExpirationDuration);
+	}
 	
 }
