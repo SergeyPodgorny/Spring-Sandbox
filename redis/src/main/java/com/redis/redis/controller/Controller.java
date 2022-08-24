@@ -22,25 +22,22 @@ public class Controller {
 	
 	@GetMapping("/")
 	public String test(HttpServletRequest request, HttpServletResponse response) {
-				
-		Cookie cookie = new Cookie("12356","COOKIE");
 		
-		HttpSession session = request.getSession(true);
-		
-		
-		response.addCookie(cookie);
-		
-		session.setAttribute("username", "admin");	
-		
-		logger.info(""+session.getCreationTime());
-		
-		logger.info(session.getAttribute("username").toString());
-		
+		HttpSession session = request.getSession();
+			
+//		session.setAttribute("username", "admin");	
+//		
+//		session.setAttribute("session_id", session.getId());	
+//		
+//		logger.info(session.getAttribute("username").toString());
+//		
 		logger.info(session.getId());
 		
-		MessageDTO message = new MessageDTO("OKKKK");
 		
-		return message.getMessage();
+		
+//		MessageDTO message = new MessageDTO("OKKKK");
+		
+		return session.getId();
 	}
 
 	

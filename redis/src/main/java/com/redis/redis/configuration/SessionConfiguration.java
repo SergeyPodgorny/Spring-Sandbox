@@ -12,7 +12,7 @@ public class SessionConfiguration {
 	@Bean
 	public SecurityFilterChain filter(HttpSecurity http) throws Exception {
 		
-		http.authorizeRequests().antMatchers("/").permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER);
+		http.authorizeRequests().antMatchers("/").permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 				
 		return http.build();
 		
