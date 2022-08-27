@@ -65,6 +65,12 @@ public class Controller {
 		
 		logger.info(redisRepository.getAllItems().toString());
 		
+		User updateUser = new User("1", "DOGGG");
+		
+		redisRepository.updateItem(updateUser);
+		
+		logger.info(redisRepository.getAllItems().toString());
+		
 //		logger.info(notSoRepository.getAllItems().toString());
 		
 		

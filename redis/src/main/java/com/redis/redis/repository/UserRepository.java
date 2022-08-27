@@ -59,5 +59,8 @@ public class UserRepository {
     	hashOperations.delete(KEY, id);
     }
     
-    
+    //update entry
+    public void updateItem(User user){
+        addItem(user);
+    }
 }
