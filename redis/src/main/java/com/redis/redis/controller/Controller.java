@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +18,9 @@ import com.redis.redis.RedisApplication;
 @RestController
 public class Controller {
 
+	
+	@Autowired
+	private RedisTemplate<String, Object> redisTemplate;
 	
 	private final Logger logger = LoggerFactory.getLogger(RedisApplication.class);
 	
@@ -32,6 +37,9 @@ public class Controller {
 //		logger.info(session.getAttribute("username").toString());
 //		
 		logger.info(session.getId());
+		
+		
+		redisTemplate.persist("persistance");
 		
 		
 		
