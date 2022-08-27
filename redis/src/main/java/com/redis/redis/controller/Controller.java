@@ -59,10 +59,18 @@ public class Controller {
 		
 		notSoRepository.addItem(user6);
 		
+		logger.info(redisRepository.getAllItems().toString());
+		
+		redisRepository.deleteItem("5");
 		
 		logger.info(redisRepository.getAllItems().toString());
 		
-		logger.info(notSoRepository.getAllItems().toString());
+//		logger.info(notSoRepository.getAllItems().toString());
+		
+		
+		
+		
+		
 		
 	}
 	

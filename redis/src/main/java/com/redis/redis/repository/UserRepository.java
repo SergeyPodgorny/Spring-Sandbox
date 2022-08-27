@@ -54,4 +54,10 @@ public class UserRepository {
     }
     
 	
+    //delete entry
+    public void deleteItem(String id) {
+    	hashOperations.delete(KEY, id);
+    }
+    
+    
 }
