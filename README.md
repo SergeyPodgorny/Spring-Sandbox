@@ -29,4 +29,5 @@ A repository for storing my Spring Framework scratch and tutorials, such as:
 > Security folder - Username and password authentication using JWT token scratch.
 > 
 > Kafka folder - accessing kafka with java and Spring.
-
+> 
+> Redis folder - data and session info storage in redis demo.
