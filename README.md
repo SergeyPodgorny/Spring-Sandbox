@@ -25,3 +25,8 @@ A repository for storing my Spring Framework scratch and tutorials, such as:
 > SpringCloudDemo folder - demo project based on microservice architecture.
 > 
 > Caching folder - deploying the caffeine cache in Spring.
+> 
+> Security folder - Username and password authentication using JWT token scratch.
+> 
+> Kafka folder - accessing kafka with java and Spring.
+
