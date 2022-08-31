@@ -37,6 +37,7 @@ public class KafkaProducerApplication implements CommandLineRunner{
 	
 	private void sendMessage(String topicName, String message) {
 		kafkaTemplate.send(topicName, message);
+		log.info(message+ " has been sent");
 	}
 	
 	
