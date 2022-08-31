@@ -12,7 +12,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 public class KafkaProducerApplication implements CommandLineRunner{
 
 	
-	private final Logger log = LoggerFactory.getLogger(KafkaProducerApplication.class);
+	private Logger log = LoggerFactory.getLogger(KafkaProducerApplication.class);
 	
 	
 	@Autowired
