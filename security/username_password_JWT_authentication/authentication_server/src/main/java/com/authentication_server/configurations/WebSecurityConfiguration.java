@@ -9,6 +9,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebSecurityConfiguration {
@@ -19,6 +21,12 @@ public class WebSecurityConfiguration {
 		
 		http.authorizeRequests().antMatchers("/login", "/validate", "/logout").permitAll()
 		.anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);		
+		http.csrf().disable();
+		
+		http.cors();
+//		
+//		http.httpBasic();
+		
 		return http.build();
 	}
 	
@@ -32,8 +40,6 @@ public class WebSecurityConfiguration {
 	 public PasswordEncoder passwordEncoder() {
 	     return new BCryptPasswordEncoder();
 	 }
-	
-	
 	
 	
 }

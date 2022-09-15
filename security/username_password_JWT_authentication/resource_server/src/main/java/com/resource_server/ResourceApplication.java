@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class ResourceApplication implements CommandLineRunner {
+	
 
 	
 

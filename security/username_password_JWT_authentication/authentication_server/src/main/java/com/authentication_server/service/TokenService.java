@@ -21,7 +21,6 @@ import com.authentication_server.jwt_utils.JwtValidator;
 
 @Service
 @CrossOrigin
-
 public class TokenService {
 	
 	private final Logger logger = LoggerFactory.getLogger(AuthApplication.class);

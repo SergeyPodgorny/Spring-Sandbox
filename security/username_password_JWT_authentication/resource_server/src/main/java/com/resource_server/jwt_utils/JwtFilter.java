@@ -60,7 +60,7 @@ public class JwtFilter extends OncePerRequestFilter {
 	    
 	    HttpEntity<Boolean> httpEntity =  new HttpEntity<Boolean>(headers);
 	    
-	    Boolean isTokenValid = restTemplate.exchange(tokenValidationUrl, HttpMethod.GET, httpEntity, Boolean.class).getBody();
+	    Boolean isTokenValid = restTemplate.exchange(tokenValidationUrl, HttpMethod.POST, httpEntity, Boolean.class).getBody();
 	    
 	    headers.remove("token");
 	    

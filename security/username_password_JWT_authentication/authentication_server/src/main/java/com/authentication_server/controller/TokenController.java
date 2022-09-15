@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +19,7 @@ import com.authentication_server.jwt_utils.JwtValidator;
 import com.authentication_server.service.TokenService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 public class TokenController {
 	
 	private final Logger logger = LoggerFactory.getLogger(AuthApplication.class);
@@ -38,7 +38,7 @@ public class TokenController {
 
 
 
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public ResponseEntity<TokenResponseDTO> getToken(@RequestBody TokenRequestDTO tokenRequest) {
 				
 		String token = tokenService.generateToken(tokenRequest.getUsername(), tokenRequest.getPassword());
@@ -46,7 +46,7 @@ public class TokenController {
 		return ResponseEntity.ok(new TokenResponseDTO(token));
 	}
 	
-	@GetMapping("/validate")
+	@PostMapping("/validate")
 	public Boolean validateToken(HttpServletRequest request) {
 		String incomingToken = request.getHeader("token");	
 		
@@ -59,7 +59,7 @@ public class TokenController {
 		
 	}
 	
-	@GetMapping("/logout")
+	@PostMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		return tokenService.removeUserFromSession(request.getHeader("token"));
 	}

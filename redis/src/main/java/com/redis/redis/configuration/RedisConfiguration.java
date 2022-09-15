@@ -8,9 +8,14 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.core.RedisTemplate;
 
 
+
+
 @Configuration
 public class RedisConfiguration {
 
+	
+
+	
 	
 //	@Bean
 //	public LettuceConnectionFactory lettuceConnectionFactory() {
