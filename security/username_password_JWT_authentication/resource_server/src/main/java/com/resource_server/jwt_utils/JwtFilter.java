@@ -50,24 +50,24 @@ public class JwtFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		
-//		String tokenHeader = request.getHeader("Authorization");
-//		
-//	    String token = tokenHeader.substring(7);
-//	    
-//	    logger.info("incoming token: "+token);
-//	    
-//	    headers.add("token", token);
-//	    
-//	    HttpEntity<Boolean> httpEntity =  new HttpEntity<Boolean>(headers);
-//	    
-//	    Boolean isTokenValid = restTemplate.exchange(tokenValidationUrl, HttpMethod.POST, httpEntity, Boolean.class).getBody();
-//	    
-//	    headers.remove("token");
+		String tokenHeader = request.getHeader("Authorization");
+		
+	    String token = tokenHeader.substring(7);
+	    
+	    logger.info("incoming token: "+token);
+	    
+	    headers.add("token", token);
+	    
+	    HttpEntity<Boolean> httpEntity =  new HttpEntity<Boolean>(headers);
+	    
+	    Boolean isTokenValid = restTemplate.exchange(tokenValidationUrl, HttpMethod.POST, httpEntity, Boolean.class).getBody();
+	    
+	    headers.remove("token");
 	    
 		
 		System.out.println(request.getHeaderNames().toString());
 		
-	    if (true) {
+	    if (isTokenValid) {
 	    	
 	    	filterChain.doFilter(request, response);
 	    	
