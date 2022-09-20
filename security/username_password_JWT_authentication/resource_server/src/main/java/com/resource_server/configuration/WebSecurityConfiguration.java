@@ -25,9 +25,9 @@ public class WebSecurityConfiguration {
 		
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		
-		http.cors();
+//		http.cors();
 		
-		http.csrf().disable();
+//		http.csrf().disable();
 		
 		return http.build();
 	}

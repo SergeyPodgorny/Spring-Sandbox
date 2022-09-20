@@ -21,11 +21,12 @@ public class WebSecurityConfiguration {
 		
 		http.authorizeRequests().antMatchers("/login", "/validate", "/logout").permitAll()
 		.anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);		
+
 		http.csrf().disable();
 		
-		http.cors();
-//		
-//		http.httpBasic();
+//		http.cors();
+	
+
 		
 		return http.build();
 	}
