@@ -26,8 +26,6 @@ public class WebSecurityConfiguration {
 		
 //		http.cors();
 	
-
-		
 		return http.build();
 	}
 	

@@ -19,7 +19,7 @@ import com.authentication_server.jwt_utils.JwtValidator;
 import com.authentication_server.service.TokenService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class TokenController {
 	
 	private final Logger logger = LoggerFactory.getLogger(AuthApplication.class);
