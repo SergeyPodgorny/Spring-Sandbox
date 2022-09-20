@@ -18,7 +18,7 @@ import com.resource_server.dto.GameResponseDTO;
 import com.resource_server.service.GameService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000")
 public class GameController {
 
 	private final Logger logger = LoggerFactory.getLogger(ResourceApplication.class);
@@ -35,7 +35,7 @@ public class GameController {
 
 	@GetMapping("/getAll")
 	public ResponseEntity<List<GameResponseDTO>> getAllGames(HttpServletResponse response, HttpServletRequest request){
-		response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+//		response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 		
 		return ResponseEntity.ok(gameService.findAll());
 		
@@ -43,14 +43,6 @@ public class GameController {
 	}
 
 
-	@GetMapping("/test")
-	public String youShouldNotSeeThisMessage() {
-		return "If you see this message close the browser!";
-	}
-	
-	
-	
-	
 	
 	
 	
