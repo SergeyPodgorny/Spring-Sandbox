@@ -5,8 +5,6 @@ package com.resource_server.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +20,7 @@ import com.resource_server.dto.GameResponseDTO;
 import com.resource_server.service.GameService;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8090"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class GameController {
 
 	private final Logger logger = LoggerFactory.getLogger(ResourceApplication.class);
@@ -36,7 +34,6 @@ public class GameController {
 	}
 
 
-
 	@GetMapping("/getAll")
 	public ResponseEntity<List<GameResponseDTO>> getAllGames(@RequestHeader Map<String, String> headers){
 		
@@ -44,8 +41,12 @@ public class GameController {
 			logger.info(String.format("Header '%s' = %s", key, value));
 	    });
 		
-		return ResponseEntity.ok(gameService.findAll());
 		
+//		headers.entrySet().stream().forEach(System.out::println);
+		
+		
+		
+		return ResponseEntity.ok(gameService.findAll());
 		
 	}
 
