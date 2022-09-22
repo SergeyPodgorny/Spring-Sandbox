@@ -20,7 +20,7 @@ import com.resource_server.dto.GameResponseDTO;
 import com.resource_server.service.GameService;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8090"})
 public class GameController {
 
 	private final Logger logger = LoggerFactory.getLogger(ResourceApplication.class);
@@ -37,10 +37,12 @@ public class GameController {
 	@GetMapping("/getAll")
 	public ResponseEntity<List<GameResponseDTO>> getAllGames(@RequestHeader Map<String, String> headers){
 		
-		headers.forEach((key, value) -> {
-			logger.info(String.format("Header '%s' = %s", key, value));
-	    });
+//		headers.forEach((key, value) -> {
+//			logger.info(String.format("Header '%s' = %s", key, value));
+//	    });
 		
+		
+				
 		
 //		headers.entrySet().stream().forEach(System.out::println);
 		
